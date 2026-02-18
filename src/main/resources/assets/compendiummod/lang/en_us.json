@@ -1,0 +1,21 @@
+{
+  "itemGroup.compendiummod": "Example Mod Tab",
+  "block.compendiummod.example_block": "Example Block",
+  "item.compendiummod.example_item": "Example Item",
+
+  "compendiummod.configuration.title": "Example Mod Configs",
+  "compendiummod.configuration.section.compendiummod.common.toml": "Example Mod Configs",
+  "compendiummod.configuration.section.compendiummod.common.toml.title": "Example Mod Configs",
+  "compendiummod.configuration.items": "Item List",
+  "compendiummod.configuration.logDirtBlock": "Log Dirt Block",
+  "compendiummod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "compendiummod.configuration.magicNumber": "Magic Number",
+
+  "item.compendiummod.dawnbreaker": "Dawn Breaker",
+  "item.compendiummod.dawnbreaker_hilt": "Hilt of the sun god's sword",
+  "item.compendiummod.dawnbreaker_blade": "Broad blade of the sun god's sword",
+  "item.compendiummod.dawnbreaker_tip": "Firmament of the sun god's sword",
+
+  "creativetab.compendiummod.compendium_tab": "Compendium"
+
+}

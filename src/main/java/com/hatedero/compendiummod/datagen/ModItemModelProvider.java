@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.datagen;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +25,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        
+        basicItem(ModItems.DAWNBREAKER_HILT.get());
+        basicItem(ModItems.DAWNBREAKER_BLADE.get());
+        basicItem(ModItems.DAWNBREAKER_TIP.get());
     }
 
     private ItemModelBuilder handheldItem(DeferredItem<?> item) {
