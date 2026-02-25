@@ -13,7 +13,7 @@ public class ModAttachments {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CompendiumMod.MODID);
 
     public static final Supplier<AttachmentType<Integer>> MANA = ATTACHMENT_TYPES.register(
-            "mana", () -> AttachmentType.builder(() -> 0).serialize(Codec.DOUBLE.fieldOf("mana")).build()
+            "mana", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
 
     public static void register(IEventBus eventBus) {

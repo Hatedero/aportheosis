@@ -54,9 +54,7 @@ public class BlockingSwordItem extends TieredItem {
         if (!level.isClientSide && livingEntity instanceof Player) {
             stack.hurtAndBreak(1, livingEntity, LivingEntity.getSlotForHand(livingEntity.getUsedItemHand()));
 
-            livingEntity.setData(MANA, (int) (livingEntity.getAttributeValue(ModAttributes.MAX_MANA) - 1));
-
-            ((Player) livingEntity).displayClientMessage(Component.literal("MAX MANA : " + String.valueOf(livingEntity.getAttributeValue(ModAttributes.MAX_MANA)) + " | CURRENT MANA : " + livingEntity.getData(MANA)), true);
+            ((Player) livingEntity).displayClientMessage(Component.literal("MAX MANA : " + livingEntity.getAttributeValue(ModAttributes.MAX_MANA) + " | CURRENT MANA : " + livingEntity.getData(MANA)), true);
 
             float randomSpeed = (float) (20f * Math.random());
 
@@ -81,11 +79,6 @@ public class BlockingSwordItem extends TieredItem {
                     .build();
 
             stack.set(DataComponents.ATTRIBUTE_MODIFIERS, newModifiers);
-
-            stack.getAttributeModifiers().modifiers().forEach((modifier) -> {
-                        livingEntity.sendSystemMessage(Component.literal(modifier.attribute().getRegisteredName()));
-                    }
-            );
         }
         super.releaseUsing(stack, level, livingEntity, timeCharged);
     }
