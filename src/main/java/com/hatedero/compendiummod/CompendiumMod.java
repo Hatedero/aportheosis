@@ -3,6 +3,7 @@ package com.hatedero.compendiummod;
 import com.hatedero.compendiummod.block.ModBlocks;
 import com.hatedero.compendiummod.item.ModCreativeModeTabs;
 import com.hatedero.compendiummod.item.ModItems;
+import com.hatedero.compendiummod.mana.ModAttachments;
 import com.hatedero.compendiummod.mana.ModAttributes;
 import org.slf4j.Logger;
 
@@ -51,11 +52,7 @@ public class CompendiumMod {
 
         ModAttributes.register(modEventBus);
 
-        //ModEffects.register(modEventBus);
-
-        //ModEnchantmentEffects.register(modEventBus);
-
-        //ModAttachment.register(modEventBus);
+        ModAttachments.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 

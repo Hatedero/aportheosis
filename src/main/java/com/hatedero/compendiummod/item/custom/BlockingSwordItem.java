@@ -27,6 +27,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
+import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
+
 public class BlockingSwordItem extends TieredItem {
 
     public BlockingSwordItem(Tier tier, Properties properties) {
@@ -52,7 +54,9 @@ public class BlockingSwordItem extends TieredItem {
         if (!level.isClientSide && livingEntity instanceof Player) {
             stack.hurtAndBreak(1, livingEntity, LivingEntity.getSlotForHand(livingEntity.getUsedItemHand()));
 
-            ((Player) livingEntity).displayClientMessage(Component.literal(String.valueOf(livingEntity.getAttributeValue(ModAttributes.MAX_MANA))), true);
+            livingEntity.setData(MANA, (int) (livingEntity.getAttributeValue(ModAttributes.MAX_MANA) - 1));
+
+            ((Player) livingEntity).displayClientMessage(Component.literal("MAX MANA : " + String.valueOf(livingEntity.getAttributeValue(ModAttributes.MAX_MANA)) + " | CURRENT MANA : " + livingEntity.getData(MANA)), true);
 
             float randomSpeed = (float) (20f * Math.random());
 
