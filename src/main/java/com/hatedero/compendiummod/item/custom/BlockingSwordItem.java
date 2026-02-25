@@ -1,5 +1,6 @@
 package com.hatedero.compendiummod.item.custom;
 
+import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.mana.ModAttributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -14,6 +15,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +27,11 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
+
+import java.util.Random;
 
 import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
 
@@ -54,9 +60,15 @@ public class BlockingSwordItem extends TieredItem {
         if (!level.isClientSide && livingEntity instanceof Player) {
             stack.hurtAndBreak(1, livingEntity, LivingEntity.getSlotForHand(livingEntity.getUsedItemHand()));
 
-            livingEntity.setData(MANA, (int) (Math.random() * livingEntity.getAttributeValue(ModAttributes.MAX_MANA)));
+            AttributeInstance instance = livingEntity.getAttribute(ModAttributes.MAX_MANA);
 
-            ((Player) livingEntity).displayClientMessage(Component.literal("MAX MANA : " + livingEntity.getAttributeValue(ModAttributes.MAX_MANA) + " | CURRENT MANA : " + livingEntity.getData(MANA)), true);
+            Random random = new Random();
+
+            if (instance != null) {
+                instance.setBaseValue(random.nextDouble(0, 360));
+            }
+
+            livingEntity.setData(MANA, (int) (Math.random() * livingEntity.getAttributeValue(ModAttributes.MAX_MANA)));
 
             float randomSpeed = (float) (20f * Math.random());
 

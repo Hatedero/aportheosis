@@ -19,7 +19,8 @@ public class ModAttributes {
             10,
             0,
             1000000
-    ));
+    ).setSyncable(true)
+    );
 
     public static void register(IEventBus eventBus) {
         ATTRIBUTES.register(eventBus);

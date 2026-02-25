@@ -3,6 +3,7 @@ package com.hatedero.compendiummod.event;
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.item.ModItems;
 import com.hatedero.compendiummod.mana.ManaHudOverlay;
+import com.hatedero.compendiummod.mana.ModAttributes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,8 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.Random;
+
+import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
 
 @EventBusSubscriber(modid = CompendiumMod.MODID, value = Dist.CLIENT)
 public class ModClientEvents {
@@ -49,12 +52,15 @@ public class ModClientEvents {
             Vec3 right = Vec3.directionFromRotation(0, yaw + 90).normalize();
             Vec3 up = new Vec3(0, 1, 0);
 
-            int points = 5;
-            double radius = 0.3;
+            int points = (int) player.getAttributeValue(ModAttributes.MAX_MANA);
+            double radius = 1;
 
-            var i = player.tickCount%60;
-            Random random = new Random();
-            if (random.nextBoolean()) {
+            int mana = player.getData(MANA);
+
+            if (mana == 0)
+                mana = 1;
+
+            var i = player.tickCount%mana;
                 double angle = i * (2 * Math.PI / points);
 
                 double offsetX = (Math.cos(angle) * radius * right.x);
@@ -68,7 +74,6 @@ public class ModClientEvents {
                         centerZ + offsetZ,
                         0, 0, 0
                 );
-            }
         }
     }
 
