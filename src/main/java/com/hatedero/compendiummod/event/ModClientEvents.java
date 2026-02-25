@@ -17,6 +17,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.util.Random;
+
 @EventBusSubscriber(modid = CompendiumMod.MODID, value = Dist.CLIENT)
 public class ModClientEvents {
 
@@ -43,10 +45,12 @@ public class ModClientEvents {
             Vec3 right = Vec3.directionFromRotation(0, yaw + 90).normalize();
             Vec3 up = new Vec3(0, 1, 0);
 
-            int points = 30;
-            double radius = 1.5;
+            int points = 60;
+            double radius = 0.3;
 
-            var i = player.tickCount%30;
+            var i = player.tickCount%60;
+            Random random = new Random();
+            if (random.nextBoolean()) {
                 double angle = i * (2 * Math.PI / points);
 
                 double offsetX = (Math.cos(angle) * radius * right.x);
@@ -54,12 +58,13 @@ public class ModClientEvents {
                 double offsetZ = (Math.cos(angle) * radius * right.z);
 
                 level.addParticle(
-                        ParticleTypes.SOUL_FIRE_FLAME,
+                        ParticleTypes.FLAME,
                         centerX + offsetX,
                         centerY + offsetY,
                         centerZ + offsetZ,
                         0, 0, 0
                 );
+            }
         }
     }
 }

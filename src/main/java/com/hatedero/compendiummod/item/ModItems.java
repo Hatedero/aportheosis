@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CompendiumMod.MODID);
 
-    public static final DeferredItem<ArmorItem> STARFIRE_PROTOCOL = ITEMS.register("starfire_protocol",
+    public static final DeferredItem<ArmorItem> STARFIRE_PROTOCOL = ITEMS.register("starfire_protocol_chestplate",
             () -> new ArmorItem(ModArmorMaterials.STARFIRE_PROTOCOL_AM, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(40))));
 

@@ -21,7 +21,7 @@ public class ModArmorMaterials {
 
     public static final Holder<ArmorMaterial>
 
-            STARFIRE_PROTOCOL_AM = register("starfire_protocol_am",
+            STARFIRE_PROTOCOL_AM = register("starfire_protocol",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
                 attribute.put(ArmorItem.Type.CHESTPLATE, 7);
                 attribute.put(ArmorItem.Type.BODY, 20);
