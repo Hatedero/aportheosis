@@ -47,17 +47,11 @@ public class ModClientEvents {
 
         if (!level.isClientSide) return;
 
-        ItemStack chestSlot = player.getItemBySlot(EquipmentSlot.CHEST);
         if (player.getData(SHOW_MANA)) {
 
             double distance = 0.3;
             Vec3 look = player.getLookAngle();
             Vec3 forward = new Vec3(look.x, 0, look.z).normalize().scale(distance);
-
-            float bodyYaw = player.yBodyRot;
-            Direction bodyDirection = Direction.fromYRot(bodyYaw);
-            Vec3 bodyVector = Vec3.directionFromRotation(0, bodyYaw);
-            /*Vec3 forward = new Vec3(bodyVector.x, 0, bodyVector.z).normalize().scale(distance);*/
 
             double centerX = player.getX() + forward.x;
             double centerY = player.getY() + player.getEyeHeight() * 0.7;
@@ -77,26 +71,6 @@ public class ModClientEvents {
 
             List<SimpleParticleType> particles = List.of(ParticleTypes.FLAME, ParticleTypes.SOUL_FIRE_FLAME);
             double gap = player.getAttributeValue(ModAttributes.MAX_MANA)/particles.size();
-
-            /*Map<Vec3, SimpleParticleType> directions = new HashMap<>();
-            directions.put(new Vec3(1,1,0), ParticleTypes.FLAME);
-            directions.put(new Vec3(-1,-1,0), ParticleTypes.SOUL_FIRE_FLAME);
-            directions.put(new Vec3(1,-1,0), ParticleTypes.FLAME);
-            directions.put(new Vec3(-1,1,0), ParticleTypes.SOUL_FIRE_FLAME);
-            directions.put(new Vec3(0,0,1), ParticleTypes.END_ROD);
-            float amp = 0.02f;
-
-            directions.forEach((mov, part) -> {
-                level.addParticle(
-                        part,
-                        centerX,
-                        centerY,
-                        centerZ,
-                        mov.x * amp,
-                        mov.y * amp,
-                        mov.z * amp
-                );
-            });*/
 
             var i = player.tickCount%mana;
 
