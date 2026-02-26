@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "compendiummod:item/starfire_protocol_chestplate_quartz_trim",
+      "predicate": {
+        "minecraft:trim_type": 0.1
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "compendiummod:item/starfire_protocol_chestplate"
+  }
+}

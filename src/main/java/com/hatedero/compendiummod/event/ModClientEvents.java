@@ -6,6 +6,7 @@ import com.hatedero.compendiummod.mana.ManaHudOverlay;
 import com.hatedero.compendiummod.mana.ModAttributes;
 import com.ibm.icu.text.MessagePattern;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
@@ -23,8 +24,11 @@ import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.registries.datamaps.DataMapEntry;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
@@ -45,18 +49,25 @@ public class ModClientEvents {
 
             double distance = 0.3;
             Vec3 look = player.getLookAngle();
-            Vec3 forward = new Vec3(look.x, 0, look.z).normalize().scale(distance);
+            //Vec3 forward = new Vec3(look.x, 0, look.z).normalize().scale(distance);
+
+            float bodyYaw = player.yBodyRot;
+            Direction bodyDirection = Direction.fromYRot(bodyYaw);
+            Vec3 bodyVector = Vec3.directionFromRotation(0, bodyYaw);
+            Vec3 forward = new Vec3(bodyVector.x, 0, bodyVector.z).normalize().scale(distance);
 
             double centerX = player.getX() + forward.x;
             double centerY = player.getY() + player.getEyeHeight() * 0.7;
             double centerZ = player.getZ() + forward.z;
+
+
 
             float yaw = player.getYRot();
             Vec3 right = Vec3.directionFromRotation(0, yaw + 90).normalize();
             Vec3 up = new Vec3(0, 1, 0);
 
             int points = (int) player.getAttributeValue(ModAttributes.MAX_MANA);
-            double radius = 1;
+            double radius = 0.2;
 
             double mana = player.getData(MANA);
 
@@ -68,7 +79,27 @@ public class ModClientEvents {
             List<SimpleParticleType> particles = List.of(ParticleTypes.FLAME, ParticleTypes.SOUL_FIRE_FLAME);
             double gap = player.getAttributeValue(ModAttributes.MAX_MANA)/particles.size();
 
-            for (int j = 0; j < particles.size(); j++) {
+            Map<Vec3, SimpleParticleType> directions = new HashMap<>();
+            directions.put(new Vec3(1,1,0), ParticleTypes.FLAME);
+            directions.put(new Vec3(-1,-1,0), ParticleTypes.SOUL_FIRE_FLAME);
+            directions.put(new Vec3(1,-1,0), ParticleTypes.FLAME);
+            directions.put(new Vec3(-1,1,0), ParticleTypes.SOUL_FIRE_FLAME);
+            directions.put(new Vec3(0,0,1), ParticleTypes.END_ROD);
+            float amp = 0.015f;
+
+            directions.forEach((mov, part) -> {
+                level.addParticle(
+                        part,
+                        centerX,
+                        centerY,
+                        centerZ,
+                        mov.x * amp,
+                        mov.y * amp,
+                        mov.z * amp
+                );
+            });
+
+            /*for (int j = 0; j < particles.size(); j++) {
                 var angle = (gap*j + i) * (2 * Math.PI / points);
 
                 double offsetX = (Math.cos(angle) * radius * right.x);
@@ -82,7 +113,7 @@ public class ModClientEvents {
                         centerZ + offsetZ,
                         0, 0, 0
                 );
-            }
+            }*/
         }
     }
 

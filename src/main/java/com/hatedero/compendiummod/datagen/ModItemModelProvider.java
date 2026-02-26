@@ -21,8 +21,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private static LinkedHashMap<ResourceKey<TrimMaterial>, Float> trimMaterials = new LinkedHashMap<>();
     static {
-        /*trimMaterials.put(TrimMaterials.QUARTZ, 0.1F);
-        trimMaterials.put(TrimMaterials.IRON, 0.2F);
+        trimMaterials.put(TrimMaterials.QUARTZ, 0.1F);
+        /*trimMaterials.put(TrimMaterials.IRON, 0.2F);
         trimMaterials.put(TrimMaterials.NETHERITE, 0.3F);
         trimMaterials.put(TrimMaterials.REDSTONE, 0.4F);
         trimMaterials.put(TrimMaterials.COPPER, 0.5F);

@@ -24,7 +24,7 @@ public class ModAttributes {
 
     public static final Holder<Attribute> MANA_REGEN = ATTRIBUTES.register("mana_regen", () -> new RangedAttribute(
                     "attributes."+CompendiumMod.MODID+".mana_regen",
-                    36,
+                    1,
                     0,
                     1000000
             ).setSyncable(true)
