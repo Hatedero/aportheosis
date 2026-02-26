@@ -65,7 +65,7 @@ public class BlockingSwordItem extends TieredItem {
             Random random = new Random();
 
             if (instance != null) {
-                instance.setBaseValue(360);
+                instance.setBaseValue(100);
             }
 
             livingEntity.setData(MANA, 0.0);

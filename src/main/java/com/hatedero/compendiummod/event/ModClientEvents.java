@@ -62,7 +62,7 @@ public class ModClientEvents {
             Vec3 up = new Vec3(0, 1, 0);
 
             int points = (int) player.getAttributeValue(ModAttributes.MAX_MANA);
-            double radius = 0.3;
+            double radius = 1.5;
 
             double mana = player.getData(MANA);
 
