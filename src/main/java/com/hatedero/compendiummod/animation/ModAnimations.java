@@ -11,9 +11,9 @@ public class ModAnimations {
     public static ResourceLocation ASCEND =
             ResourceLocation.fromNamespaceAndPath(CompendiumMod.MODID, "ascend");
 
-    PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(ResourceLocation.fromNamespaceAndPath(CompendiumMod.MODID, "ascend"), 1000,
+    /*PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(ASCEND, 1000,
     player -> new PlayerAnimationController(player,
                 (controller, state, animSetter) -> PlayState.STOP
         )
-                );
+                );*/
 }

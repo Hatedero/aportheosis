@@ -10,6 +10,7 @@ import com.zigythebird.playeranim.animation.PlayerAnimationController;
 import com.zigythebird.playeranim.api.PlayerAnimationAccess;
 import com.zigythebird.playeranim.api.PlayerAnimationFactory;
 import com.zigythebird.playeranimcore.animation.layered.modifier.AbstractFadeModifier;
+import com.zigythebird.playeranimcore.enums.PlayState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.Direction;
@@ -55,9 +56,29 @@ public class ModClientEvents {
         if (!level.isClientSide) return;
 
         if (player.getData(SHOW_MANA)) {
-            PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(
+            /*PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(
                     (AbstractClientPlayer) player, ANIMATION_LAYER_ID);
             controller.triggerAnimation(ResourceLocation.fromNamespaceAndPath(CompendiumMod.MODID, "ascend"));
+
+            PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(ANIMATION_LAYER_ID, 1000, player -> {
+                return new ModifierLayerAnimationController<>(player, (controller, state, animSetter) -> {
+
+                    if (player.isSprinting()) {
+
+                        var animation = PlayerAnimationRegistry.getAnimation(
+                                ResourceLocation.fromNamespaceAndPath("my_mod", "custom_sprint_pose")
+                        );
+
+                        if (animation != null) {
+                            animSetter.setAnimation(animation);
+                            return PlayState.CONTINUE; // Keep playing while the condition is true
+                        }
+                    }
+
+                    return PlayState.STOP;
+                });
+            });*/
+
             double mana = player.getData(MANA);
             double maxMana = player.getAttributeValue(ModAttributes.MAX_MANA);
 
