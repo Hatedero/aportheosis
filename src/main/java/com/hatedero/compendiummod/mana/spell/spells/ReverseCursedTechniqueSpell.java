@@ -20,11 +20,6 @@ public class ReverseCursedTechniqueSpell extends Spell {
     }
 
     @Override
-    public boolean canStart(Player player) {
-        return player.getData(CAST_COOLDOWN) <= 0;
-    }
-
-    @Override
     public void chargeTick(Level level, LivingEntity livingEntity, int remainingUseDuration) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
             if (canUseMana(livingEntity)) {
@@ -41,7 +36,7 @@ public class ReverseCursedTechniqueSpell extends Spell {
     public boolean canUseMana(LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
             double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
-            if (player.getData(MANA) - cost >= 0 &&  player.getData(CHARGE_TIME) <= getUseDuration() && canStart(player))
+            if (player.getData(MANA) - cost >= 0 &&  player.getData(CHARGE_TIME) <= getUseDuration())
                 return true;
         }
         return false;
@@ -49,8 +44,10 @@ public class ReverseCursedTechniqueSpell extends Spell {
 
     @Override
     public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
-        livingEntity.setData(CAST_COOLDOWN, getUseDuration());
-        livingEntity.setData(IS_CHARGING, false);
-        livingEntity.setData(CHARGE_TIME, 0);
+        if (!level.isClientSide()) {
+            livingEntity.setData(CAST_COOLDOWN, getUseDuration());
+            livingEntity.setData(IS_CHARGING, false);
+            livingEntity.setData(CHARGE_TIME, 0);
+        };
     }
 }

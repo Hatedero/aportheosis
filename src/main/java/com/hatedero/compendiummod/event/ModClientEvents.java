@@ -15,6 +15,7 @@ import com.zigythebird.playeranimcore.animation.layered.modifier.AbstractFadeMod
 import com.zigythebird.playeranimcore.enums.PlayState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -32,6 +33,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.datamaps.DataMapEntry;
@@ -116,9 +118,18 @@ public class ModClientEvents {
             int newValue = playerChargeTime + 1;
             player.setData(CHARGE_TIME, newValue);
             player.displayClientMessage(Component.literal("USING " + spell.getName() + " FOR - : " + newValue/20 + "s"), true);
-        } else {
-            player.setData(CHARGE_TIME, 0);
-            player.setData(IS_CHARGING, false);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRenderGui(RenderGuiEvent.Post event) {
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) return;
+
+        int cooldown = player.getData(CAST_COOLDOWN);
+        if (cooldown > 0) {
+            String text = "Cooldown: " + (cooldown / 20) + "s";
+            event.getGuiGraphics().drawString(Minecraft.getInstance().font, text, 10, 10, 0xFFFFFF);
         }
     }
 

@@ -44,10 +44,9 @@ public class ModAttachments {
     );
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> IS_CHARGING = ATTACHMENT_TYPES.register(
-            "is_charging", () -> AttachmentType.builder(() -> true)
+            "is_charging", () -> AttachmentType.builder(() -> false)
                     .serialize(Codec.BOOL)
                     .sync(new IsChargingSyncHandler())
-                    .copyOnDeath()
                     .build()
     );
 

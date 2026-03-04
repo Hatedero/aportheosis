@@ -22,8 +22,6 @@ public abstract class Spell{
         return name;
     }
 
-    public abstract boolean canStart (Player player);
-
     public abstract void chargeTick (Level level, LivingEntity livingEntity, int remainingUseDuration);
 
     public abstract void release (Level level, LivingEntity livingEntity, int remainingUseDuration);
