@@ -42,13 +42,4 @@ public class ReverseCursedTechniqueSpell extends Spell {
         }
         return false;
     }
-
-    @Override
-    public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
-        if (!level.isClientSide()) {
-            livingEntity.setData(CAST_COOLDOWN, getUseDuration());
-            livingEntity.setData(IS_CHARGING, false);
-            livingEntity.setData(CHARGE_TIME, 0);
-        }
-    }
 }

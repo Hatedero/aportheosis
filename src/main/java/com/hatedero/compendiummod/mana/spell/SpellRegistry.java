@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.mana.spell.spells.FireBallSpell;
 import com.hatedero.compendiummod.mana.spell.spells.ReverseCursedTechniqueSpell;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -38,5 +39,5 @@ public class SpellRegistry {
             () -> new ReverseCursedTechniqueSpell("Reverse Cursed Technique", 5));
 
     public static final DeferredHolder<Spell, Spell> FIREBALL = SPELLS.register("fireball",
-            () -> new ReverseCursedTechniqueSpell("Fireball", 2));
+            () -> new FireBallSpell("Fireball", 2));
 }

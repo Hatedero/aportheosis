@@ -22,7 +22,7 @@ public class ReverseCursedTechniqueSpellItem extends SpellItem{
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
-            player.setData(CURRENT_SPELL_ID, "reverse_cursed_technique");
+            player.setData(CURRENT_SPELL_ID, "fireball");
             if (canUseMana(livingEntity)) {
                 double cost = (manaCost * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
                 player.setData(MANA, player.getData(MANA) - cost);

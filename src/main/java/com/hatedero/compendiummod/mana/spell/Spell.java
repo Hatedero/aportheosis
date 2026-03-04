@@ -8,7 +8,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.Map;
 
-import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
+import static com.hatedero.compendiummod.mana.ModAttachments.*;
+import static com.hatedero.compendiummod.mana.ModAttachments.CHARGE_TIME;
 
 public abstract class Spell{
     protected float costPerTick;
@@ -37,7 +38,13 @@ public abstract class Spell{
         }
     }
 
-    public abstract void release (Level level, LivingEntity livingEntity, int remainingUseDuration);
+    public void release (Level level, LivingEntity livingEntity, int remainingUseDuration) {
+        if (!level.isClientSide()) {
+            livingEntity.setData(CAST_COOLDOWN, getUseDuration());
+            livingEntity.setData(IS_CHARGING, false);
+            livingEntity.setData(CHARGE_TIME, 0);
+        }
+    }
 
     public abstract boolean canUseMana (LivingEntity livingEntity);
 }
