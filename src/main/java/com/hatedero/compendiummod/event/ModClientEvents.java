@@ -111,13 +111,14 @@ public class ModClientEvents {
 
         Spell spell = getSpell(level, player.getData(CURRENT_SPELL_ID));
 
-        if (ModKeybinds.CHARGE_SPELL_KEY.isDown() && spell != null) {
+        if (player.getData(IS_CHARGING) && spell != null) {
             int playerChargeTime = player.getData(CHARGE_TIME);
             int newValue = playerChargeTime + 1;
             player.setData(CHARGE_TIME, newValue);
             player.displayClientMessage(Component.literal("USING " + spell.getName() + " FOR - : " + newValue/20 + "s"), true);
         } else {
             player.setData(CHARGE_TIME, 0);
+            player.setData(IS_CHARGING, false);
         }
     }
 

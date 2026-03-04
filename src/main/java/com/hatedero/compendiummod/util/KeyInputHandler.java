@@ -35,6 +35,7 @@ public class KeyInputHandler {
             } else if (ModKeybinds.CHARGE_SPELL_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
                 LocalPlayer player = Minecraft.getInstance().player;
                 if (player != null) {
+                    player.setData(IS_CHARGING, true);
                     PacketDistributor.sendToServer(new IsChargingUpdatePayload(true));
                 }
             }
