@@ -15,5 +15,11 @@ public class ModKeybinds {
             KEY_CATEGORY
     );
 
+    public static final KeyMapping CHARGE_SPELL_KEY = new KeyMapping(
+            "key."+CompendiumMod.MODID+".charge_spell",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_R,
+            KEY_CATEGORY
+    );
 
 }

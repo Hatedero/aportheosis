@@ -4,6 +4,8 @@ import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.item.ModItems;
 import com.hatedero.compendiummod.mana.ManaHudOverlay;
 import com.hatedero.compendiummod.mana.ModAttributes;
+import com.hatedero.compendiummod.mana.spell.Spell;
+import com.hatedero.compendiummod.util.KeyInputHandler;
 import com.hatedero.compendiummod.util.ModKeybinds;
 import com.ibm.icu.text.MessagePattern;
 import com.zigythebird.playeranim.animation.PlayerAnimationController;
@@ -39,8 +41,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
-import static com.hatedero.compendiummod.mana.ModAttachments.SHOW_MANA;
+import static com.hatedero.compendiummod.mana.ModAttachments.*;
+import static com.hatedero.compendiummod.mana.spell.SpellRegistry.SPELLS;
+import static com.hatedero.compendiummod.mana.spell.SpellRegistry.getSpell;
 import static com.hatedero.compendiummod.particles.ParticleUtils.drawParticleCircle;
 import static com.zigythebird.playeranim.PlayerAnimLibMod.ANIMATION_LAYER_ID;
 
@@ -49,41 +52,21 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
+        handleShowMana(event);
+        handleSpellCharging(event);
+    }
+
+    public static void handleShowMana(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
 
         Level level = player.level();
 
-        if (!level.isClientSide) return;
-
         if (player.getData(SHOW_MANA)) {
-            /*PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(
-                    (AbstractClientPlayer) player, ANIMATION_LAYER_ID);
-            controller.triggerAnimation(ResourceLocation.fromNamespaceAndPath(CompendiumMod.MODID, "ascend"));
-
-            PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(ANIMATION_LAYER_ID, 1000, player -> {
-                return new ModifierLayerAnimationController<>(player, (controller, state, animSetter) -> {
-
-                    if (player.isSprinting()) {
-
-                        var animation = PlayerAnimationRegistry.getAnimation(
-                                ResourceLocation.fromNamespaceAndPath("my_mod", "custom_sprint_pose")
-                        );
-
-                        if (animation != null) {
-                            animSetter.setAnimation(animation);
-                            return PlayState.CONTINUE; // Keep playing while the condition is true
-                        }
-                    }
-
-                    return PlayState.STOP;
-                });
-            });*/
-
             double mana = player.getData(MANA);
             double maxMana = player.getAttributeValue(ModAttributes.MAX_MANA);
 
             if (maxMana <= 0)
-                    return;
+                return;
 
             double manaRegen = player.getAttributeValue(ModAttributes.MANA_REGEN);
 
@@ -94,7 +77,6 @@ public class ModClientEvents {
             double radius = (maxMana*0.1)/2.0;
             int dots = 180;
 
-            //DRAW MAX MANA BOUNDARY
             drawParticleCircle(
                     player.level(),
                     pos,
@@ -105,7 +87,6 @@ public class ModClientEvents {
                     new Vec3(0,0,0)
             );
 
-            //DRAW MANA PERCENTAGE
             for(int i = 0; i < manaPercentage; i++) {
                 if (player.tickCount % (i+1) == 0) {
                     drawParticleCircle(
@@ -123,6 +104,23 @@ public class ModClientEvents {
         }
     }
 
+    public static void handleSpellCharging(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+
+        Level level = player.level();
+
+        Spell spell = getSpell(level, player.getData(CURRENT_SPELL_ID));
+
+        if (ModKeybinds.CHARGE_SPELL_KEY.isDown() && spell != null) {
+            int playerChargeTime = player.getData(CHARGE_TIME);
+            int newValue = playerChargeTime + 1;
+            player.setData(CHARGE_TIME, newValue);
+            player.displayClientMessage(Component.literal("USING " + spell.getName() + " FOR - : " + newValue/20 + "s"), true);
+        } else {
+            player.setData(CHARGE_TIME, 0);
+        }
+    }
+
     @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.HOTBAR,
@@ -133,5 +131,6 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(ModKeybinds.SHOW_MANA_ACTION_KEY);
+        event.register(ModKeybinds.CHARGE_SPELL_KEY);
     }
 }

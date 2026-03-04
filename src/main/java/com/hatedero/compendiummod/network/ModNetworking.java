@@ -1,6 +1,12 @@
 package com.hatedero.compendiummod.network;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.network.isCharging.IsChargingUpdateClientPayloadHandler;
+import com.hatedero.compendiummod.network.isCharging.IsChargingUpdatePayload;
+import com.hatedero.compendiummod.network.isCharging.IsChargingUpdateServerPayloadHandler;
+import com.hatedero.compendiummod.network.showMana.ShowManaUpdateClientPayloadHandler;
+import com.hatedero.compendiummod.network.showMana.ShowManaUpdatePayload;
+import com.hatedero.compendiummod.network.showMana.ShowManaUpdateServerPayloadHandler;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -17,8 +23,16 @@ public class ModNetworking {
                 ShowManaUpdatePayload.TYPE,
                 ShowManaUpdatePayload.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        ClientPayloadHandler::handleDataOnMain,
-                        ServerPayloadHandler::handleDataOnMain
+                        ShowManaUpdateClientPayloadHandler::handleDataOnMain,
+                        ShowManaUpdateServerPayloadHandler::handleDataOnMain
+                )
+        );
+        registrar.playBidirectional(
+                IsChargingUpdatePayload.TYPE,
+                IsChargingUpdatePayload.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        IsChargingUpdateClientPayloadHandler::handleDataOnMain,
+                        IsChargingUpdateServerPayloadHandler::handleDataOnMain
                 )
         );
     }

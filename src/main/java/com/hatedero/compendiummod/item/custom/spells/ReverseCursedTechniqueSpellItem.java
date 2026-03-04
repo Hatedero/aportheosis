@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import static com.hatedero.compendiummod.mana.ModAttachments.CURRENT_SPELL_ID;
 import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
 
 public class ReverseCursedTechniqueSpellItem extends SpellItem{
@@ -21,6 +22,7 @@ public class ReverseCursedTechniqueSpellItem extends SpellItem{
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
+            player.setData(CURRENT_SPELL_ID, "reverse_cursed_technique");
             if (canUseMana(livingEntity)) {
                 double cost = (manaCost * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
                 player.setData(MANA, player.getData(MANA) - cost);

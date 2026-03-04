@@ -1,4 +1,4 @@
-package com.hatedero.compendiummod.mana;
+package com.hatedero.compendiummod.mana.packets;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -7,7 +7,7 @@ import net.neoforged.neoforge.attachment.IAttachmentHolder;
 
 import javax.annotation.Nullable;
 
-public class CurrentSpellIdSyncHandler implements AttachmentSyncHandler<Integer> {
+public class ChargeTimeSyncHandler implements AttachmentSyncHandler<Integer> {
 
     @Override
     public void write(RegistryFriendlyByteBuf buf, Integer attachment, boolean initialSync) {
