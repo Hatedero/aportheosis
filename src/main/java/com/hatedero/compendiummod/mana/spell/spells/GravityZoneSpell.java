@@ -2,22 +2,31 @@ package com.hatedero.compendiummod.mana.spell.spells;
 
 import com.hatedero.compendiummod.mana.ModAttributes;
 import com.hatedero.compendiummod.mana.spell.Spell;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
-import static com.hatedero.compendiummod.mana.ModAttachments.*;
+import java.util.List;
 
-public class ReverseCursedTechniqueSpell extends Spell {
-    public ReverseCursedTechniqueSpell(String name, float costPerTick) {
+import static com.hatedero.compendiummod.mana.ModAttachments.CHARGE_TIME;
+import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
+
+public class GravityZoneSpell extends Spell {
+    float strength;
+    float range;
+
+    public GravityZoneSpell(String name, float costPerTick, float strength, float range) {
         super(name, costPerTick);
+        this.strength = strength;
+        this.range = range;
     }
 
     @Override
     public int getUseDuration() {
-        return 100;
+        return 200;
     }
 
     @Override
@@ -26,7 +35,15 @@ public class ReverseCursedTechniqueSpell extends Spell {
             if (canUseMana(livingEntity)) {
                 double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
                 player.setData(MANA, player.getData(MANA) - cost);
-                player.heal((float) (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * player.getAttributeValue(ModAttributes.MANA_EFFICIENCY))/20);
+
+                BlockPos pos = player.blockPosition();
+                AABB area = new AABB(pos).inflate(range);
+
+                List<Entity> entities = level.getEntities(player, area);
+
+                for (Entity target : entities) {
+                    target.setDeltaMovement(target.getDeltaMovement().add(0, -strength, 0));
+                }
             }
             else {
                 release(level, livingEntity, remainingUseDuration);

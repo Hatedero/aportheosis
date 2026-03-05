@@ -57,16 +57,6 @@ public class DismantleSpell extends Spell {
         }
     }
 
-    @Override
-    public boolean canUseMana(LivingEntity livingEntity) {
-        if (livingEntity instanceof Player player) {
-            double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
-            if (player.getData(MANA) - cost >= 0 &&  player.getData(CHARGE_TIME) <= getUseDuration())
-                return true;
-        }
-        return false;
-    }
-
     public HitResult getPlayerLookingAt(Player player, double range) {
         Level level = player.level();
         Vec3 eyePos = player.getEyePosition();

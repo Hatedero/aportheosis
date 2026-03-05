@@ -1,10 +1,7 @@
 package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.CompendiumMod;
-import com.hatedero.compendiummod.mana.spell.spells.BlinkSpell;
-import com.hatedero.compendiummod.mana.spell.spells.DashSpell;
-import com.hatedero.compendiummod.mana.spell.spells.DismantleSpell;
-import com.hatedero.compendiummod.mana.spell.spells.ReverseCursedTechniqueSpell;
+import com.hatedero.compendiummod.mana.spell.spells.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -45,4 +42,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> BLINK = SPELLS.register("blink",
             () -> new BlinkSpell("Blink", 1));
+
+    public static final DeferredHolder<Spell, Spell> GRAVITY_ZONE = SPELLS.register("gravity_zone",
+            () -> new GravityZoneSpell("Gravity zone", 1, 1, 10));
 }

@@ -33,7 +33,7 @@ public class BlinkSpell extends Spell {
         if (!level.isClientSide() && livingEntity instanceof ServerPlayer player) {
             boolean groundedLaunch = player.onGround();
 
-            double reach = 15.0 + remainingUseDuration/20.f * 1.5;
+            double reach = 15.0 + remainingUseDuration / 20.f * 1.5;
             Vec3 eyePosition = player.getEyePosition();
             Vec3 lookVector = player.getViewVector(1.0F);
             Vec3 endVector = eyePosition.add(lookVector.scale(reach));
@@ -50,7 +50,7 @@ public class BlinkSpell extends Spell {
             player.teleportTo(targetPos.x, targetPos.y, targetPos.z);
 
             if (!groundedLaunch) {
-                double factor = 1.1 + (double) remainingUseDuration /getUseDuration();
+                double factor = 1.1 + (double) remainingUseDuration / getUseDuration();
                 player.setDeltaMovement(lookVector.multiply(factor, factor, factor));
                 player.connection.send(new ClientboundSetEntityMotionPacket(player));
             }
@@ -58,15 +58,5 @@ public class BlinkSpell extends Spell {
             player.resetFallDistance();
         }
         super.release(level, livingEntity, remainingUseDuration);
-    }
-
-    @Override
-    public boolean canUseMana(LivingEntity livingEntity) {
-        if (livingEntity instanceof Player player) {
-            double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
-            if (player.getData(MANA) - cost >= 0 &&  player.getData(CHARGE_TIME) <= getUseDuration())
-                return true;
-        }
-        return false;
     }
 }

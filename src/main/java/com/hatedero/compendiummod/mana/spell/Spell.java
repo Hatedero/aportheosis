@@ -46,5 +46,12 @@ public abstract class Spell{
         }
     }
 
-    public abstract boolean canUseMana (LivingEntity livingEntity);
+    public boolean canUseMana (LivingEntity livingEntity) {
+        if (livingEntity instanceof Player player) {
+            double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
+            if (player.getData(MANA) - cost >= 0 &&  player.getData(CHARGE_TIME) <= getUseDuration())
+                return true;
+        }
+        return false;
+    }
 }
