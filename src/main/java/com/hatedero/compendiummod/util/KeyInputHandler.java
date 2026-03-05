@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.util;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.mana.GUI.SpellScreen;
 import com.hatedero.compendiummod.network.isCharging.IsChargingUpdatePayload;
 import com.hatedero.compendiummod.network.showMana.ShowManaUpdatePayload;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -36,6 +37,8 @@ public class KeyInputHandler {
                 if (player != null) {
                     PacketDistributor.sendToServer(new IsChargingUpdatePayload(true));
                 }
+            } else if (ModKeybinds.OPEN_SPELL_MENU.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
+                Minecraft.getInstance().setScreen(new SpellScreen(Component.literal("My Mod Menu")));
             }
         } else if (event.getAction() == GLFW.GLFW_RELEASE) {
             if (ModKeybinds.CHARGE_SPELL_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {

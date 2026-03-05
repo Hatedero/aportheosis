@@ -22,4 +22,10 @@ public class ModKeybinds {
             KEY_CATEGORY
     );
 
+    public static final KeyMapping OPEN_SPELL_MENU = new KeyMapping(
+            "key."+CompendiumMod.MODID+".open_spell_menu",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_H,
+            KEY_CATEGORY
+    );
 }

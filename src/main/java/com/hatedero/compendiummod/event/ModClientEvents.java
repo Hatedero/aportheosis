@@ -14,6 +14,7 @@ import com.zigythebird.playeranim.api.PlayerAnimationFactory;
 import com.zigythebird.playeranimcore.animation.layered.modifier.AbstractFadeModifier;
 import com.zigythebird.playeranimcore.enums.PlayState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
@@ -30,10 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.datamaps.DataMapEntry;
@@ -115,10 +113,21 @@ public class ModClientEvents {
 
         if (player.getData(IS_CHARGING) && spell != null) {
             int playerChargeTime = player.getData(CHARGE_TIME);
-            int newValue = playerChargeTime + 1;
-            player.setData(CHARGE_TIME, newValue);
-            player.displayClientMessage(Component.literal("USING " + spell.getName() + " FOR - : " + newValue/20 + "s"), true);
-            spell.chargeTick(level, player, newValue);
+            //int newValue = playerChargeTime + 1;
+            //player.setData(CHARGE_TIME, newValue);
+            player.displayClientMessage(Component.literal("USING " + spell.getName() + " FOR - : " + playerChargeTime/20 + "s"), true);
+            spell.chargeTick(level, player, playerChargeTime);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRender(RenderPlayerEvent.Pre event) {
+        Player player = event.getEntity();
+
+        if (player.getData(IS_CHARGING)) {
+            event.getRenderer().getModel().rightArmPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
+            event.getRenderer().getModel().leftArmPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
+            event.getRenderer().getModel().rightArm.offsetScale(new Vec3(1,5,3).toVector3f());
         }
     }
 

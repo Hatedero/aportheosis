@@ -23,7 +23,9 @@
   "creativetab.compendiummod.compendium_tab": "Compendium",
 
   "key.categories.compendiummod": "Compendium",
+
   "key.compendiummod.show_mana_action": "Show mana",
-  "key.compendiummod.charge_spell": "Charge spell"
+  "key.compendiummod.charge_spell": "Charge spell",
+  "key.compendiummod.open_spell_menu": "Open Spell Menu"
 
 }
