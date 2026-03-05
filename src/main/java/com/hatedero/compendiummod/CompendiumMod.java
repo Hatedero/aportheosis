@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod;
 
 import com.hatedero.compendiummod.block.ModBlocks;
+import com.hatedero.compendiummod.entity.ModEntities;
 import com.hatedero.compendiummod.item.ModCreativeModeTabs;
 import com.hatedero.compendiummod.item.ModItems;
 import com.hatedero.compendiummod.mana.ModAttachments;
@@ -36,6 +37,8 @@ public class CompendiumMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModEntities.register(modEventBus);
 
         ModAttributes.register(modEventBus);
 

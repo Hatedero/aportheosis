@@ -46,16 +46,11 @@ public class DismantleSpell extends Spell {
                     BlockHitResult blockHit = (BlockHitResult) target;
                     BlockPos pos = blockHit.getBlockPos();
                     player.sendSystemMessage(Component.literal(pos.toString()));
-                    //level.destroyBlock(pos, false);
-                    slashInRandomOrientation(pos, level, 1, 5, player.getLookAngle());
+                    slashInRandomOrientation(pos, level, 1, 8, player.getLookAngle());
                 }
             }
         }
-        if (!level.isClientSide()) {
-            livingEntity.setData(CAST_COOLDOWN, 20);
-            livingEntity.setData(IS_CHARGING, false);
-            livingEntity.setData(CHARGE_TIME, 0);
-        }
+        super.release(level, livingEntity, remainingUseDuration);
     }
 
     public void slashInRandomOrientation(BlockPos origin, Level level, float strength, int radius, Vec3 direction) {
@@ -65,12 +60,12 @@ public class DismantleSpell extends Spell {
 
         Vec3 startPos = origin.getBottomCenter();
 
-        for (int i = 0; i < radius; i++) {
+        for (int i = -(radius/2); i <= (radius/2); i++) {
             Vec3 currentPos = startPos.add(orthogonalVec.scale(i));
             BlockPos blockPos = BlockPos.containing(currentPos);
 
             if (level.hasChunkAt(blockPos)) {
-                level.destroyBlock(blockPos, true);
+                level.destroyBlock(blockPos, false);
             }
         }
     }

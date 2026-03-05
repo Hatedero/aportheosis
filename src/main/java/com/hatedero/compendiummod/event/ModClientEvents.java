@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.event;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.entity.ModEntities;
 import com.hatedero.compendiummod.item.ModItems;
 import com.hatedero.compendiummod.mana.ManaHudOverlay;
 import com.hatedero.compendiummod.mana.ModAttributes;
@@ -17,6 +18,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -135,14 +138,14 @@ public class ModClientEvents {
         if (player == null) return;
 
         int cooldown = player.getData(CAST_COOLDOWN);
-        float maxCooldown = getSpell(player.level(), player.getData(CURRENT_SPELL_ID)).getCooldown();
+        //float maxCooldown = getSpell(player.level(), player.getData(CURRENT_SPELL_ID)).getCooldown();
 
         /*
         NOT ACCURATE AS PLAYER CAN CHANGE SPELL WHILE IN COOLDOWN
         But, doesn't matter since cooldown is gonna be on individual spell and not player cast
         */
         if (cooldown > 0) {
-            float progress = Math.min(1.0f, cooldown / maxCooldown);
+            float progress = Math.min(1.0f, cooldown / 5*20f);
 
             int barWidth = 50;
             int barHeight = 4;
@@ -169,5 +172,10 @@ public class ModClientEvents {
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(ModKeybinds.SHOW_MANA_ACTION_KEY);
         event.register(ModKeybinds.CHARGE_SPELL_KEY);
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.BLUE_PROJECTILE.get(), NoopRenderer::new);
     }
 }

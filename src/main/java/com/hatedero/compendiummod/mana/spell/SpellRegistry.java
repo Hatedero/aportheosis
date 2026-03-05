@@ -51,4 +51,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> INFINITY = SPELLS.register("infinity",
             () -> new InfinitySpell("Infinity", 1, 5));
+
+    public static final DeferredHolder<Spell, Spell> BLUE = SPELLS.register("blue",
+            () -> new BlueSpell("Blue", 5));
 }

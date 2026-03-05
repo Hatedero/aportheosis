@@ -46,7 +46,7 @@ public class GravityZoneSpell extends Spell {
                     entities.add(player);
 
                 for (Entity target : entities) {
-                    target.setDeltaMovement(target.getDeltaMovement().add(0, -strength, 0));
+                    target.setDeltaMovement(target.getDeltaMovement().x,-strength,target.getDeltaMovement().z);
                 }
             }
             else {
