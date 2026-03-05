@@ -17,11 +17,13 @@ import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
 public class GravityZoneSpell extends Spell {
     float strength;
     float range;
+    boolean includePlayer;
 
-    public GravityZoneSpell(String name, float costPerTick, float strength, float range) {
+    public GravityZoneSpell(String name, float costPerTick, float strength, float range, boolean includePlayer) {
         super(name, costPerTick);
         this.strength = strength;
         this.range = range;
+        this.includePlayer = includePlayer;
     }
 
     @Override
@@ -36,10 +38,12 @@ public class GravityZoneSpell extends Spell {
                 double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
                 player.setData(MANA, player.getData(MANA) - cost);
 
-                BlockPos pos = player.blockPosition();
-                AABB area = new AABB(pos).inflate(range);
+                AABB area = player.getBoundingBox().inflate(range);
 
                 List<Entity> entities = level.getEntities(player, area);
+
+                if(includePlayer)
+                    entities.add(player);
 
                 for (Entity target : entities) {
                     target.setDeltaMovement(target.getDeltaMovement().add(0, -strength, 0));

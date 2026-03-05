@@ -44,5 +44,8 @@ public class SpellRegistry {
             () -> new BlinkSpell("Blink", 1));
 
     public static final DeferredHolder<Spell, Spell> GRAVITY_ZONE = SPELLS.register("gravity_zone",
-            () -> new GravityZoneSpell("Gravity zone", 1, 1, 10));
+            () -> new GravityZoneSpell("Gravity zone", 1, 1, 10, false));
+
+    public static final DeferredHolder<Spell, Spell> ANTI_GRAVITY_ZONE = SPELLS.register("anti_gravity_zone",
+            () -> new GravityZoneSpell("Anti gravity zone", 1, -1, 10, true));
 }
