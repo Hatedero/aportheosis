@@ -40,11 +40,15 @@ public abstract class Spell{
 
     public void release (Level level, LivingEntity livingEntity, int remainingUseDuration) {
         if (!level.isClientSide()) {
-            livingEntity.setData(CAST_COOLDOWN, getUseDuration());
+            livingEntity.setData(CAST_COOLDOWN, getCooldown());
             livingEntity.setData(IS_CHARGING, false);
             livingEntity.setData(CHARGE_TIME, 0);
         }
     }
+
+    public int getCooldown() {
+        return 100;
+    };
 
     public boolean canUseMana (LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {

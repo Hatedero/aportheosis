@@ -48,4 +48,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> ANTI_GRAVITY_ZONE = SPELLS.register("anti_gravity_zone",
             () -> new GravityZoneSpell("Anti gravity zone", 1, -1, 10, true));
+
+    public static final DeferredHolder<Spell, Spell> INFINITY = SPELLS.register("infinity",
+            () -> new InfinitySpell("Infinity", 1, 5));
 }

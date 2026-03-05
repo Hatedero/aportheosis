@@ -135,7 +135,7 @@ public class ModClientEvents {
         if (player == null) return;
 
         int cooldown = player.getData(CAST_COOLDOWN);
-        float maxCooldown = getSpell(player.level(), player.getData(CURRENT_SPELL_ID)).getUseDuration();
+        float maxCooldown = getSpell(player.level(), player.getData(CURRENT_SPELL_ID)).getCooldown();
 
         /*
         NOT ACCURATE AS PLAYER CAN CHANGE SPELL WHILE IN COOLDOWN
