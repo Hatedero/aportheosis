@@ -19,10 +19,6 @@ public class SpellRegistry {
 
     public static final Registry<Spell> REGISTRY = SPELLS.makeRegistry(builder -> builder.sync(true));
 
-    public static ResourceLocation geTranslationKey(Spell spell) {
-        return spell == null ? ResourceLocation.fromNamespaceAndPath(CompendiumMod.MODID, "") : SpellRegistry.REGISTRY.getKey(spell);
-    }
-
     public static Spell getSpell(Level level, String id) {
         Registry<Spell> registry = level.registryAccess().registryOrThrow(SPELL_REGISTRY_KEY);
 

@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.event;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.CompendiumModClient;
 import com.hatedero.compendiummod.entity.ModEntities;
 import com.hatedero.compendiummod.item.ModItems;
 import com.hatedero.compendiummod.mana.ManaHudOverlay;
@@ -115,9 +116,11 @@ public class ModClientEvents {
 
         Spell spell = getSpell(level, player.getData(CURRENT_SPELL_ID));
 
+
         if (player.getData(IS_CHARGING) && spell != null) {
+            String translationKey = "spell." + SPELLS.getRegistry().get().getKey(spell).toLanguageKey();
             int playerChargeTime = player.getData(CHARGE_TIME);
-            player.displayClientMessage(Component.literal("USING ").append(Component.translatable(String.valueOf(SPELLS.getRegistry().get().getKey(spell)))).append(Component.literal(" FOR - : " + playerChargeTime/20 + "s")), true);
+            player.displayClientMessage(Component.literal("USING ").append(Component.translatable(translationKey)).append(Component.literal(" FOR - : " + playerChargeTime/20 + "s")), true);
             spell.chargeTick(level, player, playerChargeTime);
         }
     }

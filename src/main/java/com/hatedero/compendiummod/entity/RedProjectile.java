@@ -43,7 +43,7 @@ public class RedProjectile extends AbstractHurtingProjectile {
         }
 
         if (!this.level().isClientSide() && this.tickCount%2 == 0) {
-            this.level().explode(this, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.BLOCK);
+            this.level().explode(this, getX(), getY(), getZ(), this.getBbWidth()*this.age%20+1, Level.ExplosionInteraction.BLOCK);
         }
 
         if (this.level().isClientSide()) {
@@ -100,6 +100,8 @@ public class RedProjectile extends AbstractHurtingProjectile {
                 this.setDeltaMovement(Vec3.ZERO);
 
                 this.level().levelEvent(2001, pos, Block.getId(state));
+            } else {
+                this.level().destroyBlock(pos, false);
             }
         }
         super.onHitBlock(result);
