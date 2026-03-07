@@ -21,7 +21,9 @@ import static com.hatedero.compendiummod.mana.ModAttachments.*;
 public class KeyInputHandler {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
-        if (event.getAction() == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) {
+        if (Minecraft.getInstance().screen != null)
+            return;
+        if (event.getAction() == GLFW.GLFW_PRESS) {
 
             if (ModKeybinds.SHOW_MANA_ACTION_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
 
