@@ -44,7 +44,6 @@ public class SpellScreen extends Screen {
         this.searchBox.setResponder(this::filterList);
 
         this.searchBox.setHint(Component.literal("Search spells..."));
-        this.setInitialFocus(this.searchBox);
 
         this.addRenderableWidget(this.searchBox);
 
