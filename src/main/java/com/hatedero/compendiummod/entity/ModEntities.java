@@ -14,14 +14,14 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<BlueProjectile>> BLUE_PROJECTILE =
             ENTITIES.register("blue_projectile", () -> EntityType.Builder.<BlueProjectile>of(BlueProjectile::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
+                    .sized(1F,1F)
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("blue_projectile"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<RedProjectile>> RED_PROJECTILE =
             ENTITIES.register("red_projectile", () -> EntityType.Builder.<RedProjectile>of(RedProjectile::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
+                    .sized(1F,1F)
                     .clientTrackingRange(4)
                     .updateInterval(10)
                     .build("red_projectile"));

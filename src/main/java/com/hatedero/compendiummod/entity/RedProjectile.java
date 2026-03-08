@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -40,15 +41,6 @@ public class RedProjectile extends AbstractHurtingProjectile {
 
         if (movement.length() > speedLimit) {
             this.setDeltaMovement(movement.normalize().scale(speedLimit));
-        }
-
-        if (!this.level().isClientSide() && this.tickCount%2 == 0) {
-            this.level().explode(this, getX(), getY(), getZ(), this.getBbWidth()*this.age%20+1, Level.ExplosionInteraction.BLOCK);
-        }
-
-        if (this.level().isClientSide()) {
-            this.level().addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
-
         }
     }
 

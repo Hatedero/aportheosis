@@ -43,7 +43,7 @@ public class RedSpell extends Spell {
             RedProjectile projectile = new RedProjectile(ModEntities.RED_PROJECTILE.get(), level);
             projectile.setOwner(player);
             Vec3 eyePos = getPointInFront(livingEntity, 1);
-            projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());
+            projectile.setPos(eyePos.x(), eyePos.y() - projectile.getBbHeight()/2, eyePos.z());
 
             projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.01F, 1.0F);
 

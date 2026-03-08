@@ -2,6 +2,7 @@ package com.hatedero.compendiummod.mana.spell.spells;
 
 import com.hatedero.compendiummod.entity.BlueProjectile;
 import com.hatedero.compendiummod.entity.ModEntities;
+import com.hatedero.compendiummod.entity.ModEntityBehavior;
 import com.hatedero.compendiummod.mana.spell.Spell;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,7 +47,7 @@ public class BlueSpell extends Spell {
     @Override
     public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
         if (!level.isClientSide() && livingEntity instanceof Player player && remainingUseDuration >= 60) {
-            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level);
+            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, ModEntityBehavior.ENTITY_ATTACHED);
             projectile.setOwner(player);
             Vec3 eyePos = getPointInFront(livingEntity, 1);
             projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());

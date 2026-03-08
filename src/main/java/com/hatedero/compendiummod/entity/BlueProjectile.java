@@ -3,6 +3,7 @@ package com.hatedero.compendiummod.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
@@ -10,10 +11,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,8 +28,15 @@ import java.util.List;
 public class BlueProjectile extends AbstractHurtingProjectile {
     private int age = 0;
     private static final int MAX_LIFE = 100;
+    private double attractionForce = 0.75D;
+    private ModEntityBehavior behavior;
 
-    public BlueProjectile(EntityType<? extends BlueProjectile> type, Level level) {
+    public BlueProjectile(EntityType<? extends BlueProjectile> type, Level level, ModEntityBehavior behavior) {
+        super(type, level);
+        this.behavior = behavior;
+    }
+
+    public BlueProjectile(EntityType<BlueProjectile> type, Level level) {
         super(type, level);
     }
 
@@ -40,31 +50,45 @@ public class BlueProjectile extends AbstractHurtingProjectile {
             }
         }
 
-        super.tick();
+        //super.tick();
 
-        Vec3 movement = this.getDeltaMovement();
-        double speedLimit = 0.7D;
+        /*switch (behavior) {
+            case ModEntityBehavior.ENTITY_ATTACHED -> {*/
+                if (!this.level().isClientSide()) {
+                    Entity owner = getOwner();
+                    if (owner instanceof Player player) {
+                        this.setPos(getPositionInLookDirection(player, 12));
+                    }
+                }
+            /*}
+            case THROWN -> {
+                Vec3 movement = this.getDeltaMovement();
+                double speedLimit = 0.5D;
+
+                if (!this.level().isClientSide()) {
+                    if (movement.length() > speedLimit) {
+                        this.setDeltaMovement(movement.normalize().scale(speedLimit));
+                    }
+                }
+            }
+        }*/
 
         if (!this.level().isClientSide()) {
-            int attempts = this.age%20*3+2;
-            double blockRadius = this.age%20*2+1;
 
-            for (int i = 0; i < attempts; i++) {
-                BlockPos randomPos = this.blockPosition().offset(
-                        this.level().random.nextInt((int) blockRadius * 2) - (int) blockRadius,
-                        this.level().random.nextInt((int) blockRadius * 2) - (int) blockRadius,
-                        this.level().random.nextInt((int) blockRadius * 2) - (int) blockRadius
-                );
+            double radius = 8;
 
-                tryTurningBlockInBlockEntity(randomPos);
+            for (int x = 0; x < radius; x++) {
+                for (int y = 0; y< radius; y++) {
+                    for (int z = 0; z < radius; z++){
+                        BlockPos pos1 = this.blockPosition().offset(x,y,z);
+                        BlockPos pos2 = this.blockPosition().offset(-x,-y,-z);
+                        tryTurningBlockInBlockEntity(pos1);
+                        tryTurningBlockInBlockEntity(pos2);
+                    }
+                }
             }
         }
 
-        if (movement.length() > speedLimit) {
-            this.setDeltaMovement(movement.normalize().scale(speedLimit));
-        }
-
-        double pullStrength = 0.5D;
         double radius = 3.0D;
 
         AABB area = this.getBoundingBox().inflate(radius);
@@ -77,7 +101,7 @@ public class BlueProjectile extends AbstractHurtingProjectile {
 
             Vec3 pullVector = this.position().subtract(target.position()).normalize();
 
-            target.setDeltaMovement(target.getDeltaMovement().add(pullVector.scale(pullStrength)));
+            target.setDeltaMovement(target.getDeltaMovement().add(pullVector.scale(attractionForce)));
 
             target.hasImpulse = true;
         }
@@ -85,6 +109,14 @@ public class BlueProjectile extends AbstractHurtingProjectile {
             this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
 
         }
+    }
+
+    public Vec3 getPositionInLookDirection(Player player, double distance) {
+        Vec3 eyePos = player.getEyePosition(1.0F);
+
+        Vec3 lookVec = player.getViewVector(1.0F);
+
+        return eyePos.add(lookVec.scale(distance));
     }
 
     @Override
@@ -136,7 +168,7 @@ public class BlueProjectile extends AbstractHurtingProjectile {
 
         float blockResistance = state.getBlock().getExplosionResistance();
 
-        if (!state.isAir() && state.getDestroySpeed(this.level(), pos) >= 0 && blockResistance < resistanceThreshold) {
+        if (!state.isAir() && !state.liquid() && state.getDestroySpeed(this.level(), pos) >= 0 && blockResistance < resistanceThreshold) {
 
             FallingBlockEntity fallingBlock = FallingBlockEntity.fall(this.level(), pos, state);
 
