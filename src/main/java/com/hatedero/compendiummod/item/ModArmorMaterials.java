@@ -11,7 +11,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -26,6 +28,22 @@ public class ModArmorMaterials {
                 attribute.put(ArmorItem.Type.CHESTPLATE, 7);
                 attribute.put(ArmorItem.Type.BODY, 20);
             }), 25, 1f, 0f, () -> ModItems.DAWNBREAKER_HILT.get());
+
+    public static final Holder<ArmorMaterial>
+
+            ASCHERIIT_AM = register("ascheriit",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.HELMET, 2);
+                attribute.put(ArmorItem.Type.BODY, 20);
+            }), 25, 2f, 0f, () -> Items.IRON_INGOT);
+
+    public static final Holder<ArmorMaterial>
+
+            YUMIKO_AM = register("yumiko",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.BOOTS, 2);
+                attribute.put(ArmorItem.Type.BODY, 20);
+            }), 25, 1f, 0f, () -> Items.LEATHER);
 
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> typeProtection,

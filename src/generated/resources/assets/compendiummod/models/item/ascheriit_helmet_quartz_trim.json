@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "compendiummod:item/ascheriit_helmet",
+    "layer1": "minecraft:trims/items/helmet_trim_quartz"
+  }
+}

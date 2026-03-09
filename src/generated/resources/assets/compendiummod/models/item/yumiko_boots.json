@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "compendiummod:item/yumiko_boots_quartz_trim",
+      "predicate": {
+        "minecraft:trim_type": 0.1
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "compendiummod:item/yumiko_boots"
+  }
+}

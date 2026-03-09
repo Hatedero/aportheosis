@@ -1,4 +1,6 @@
-// 1.21.1	2026-02-27T16:21:39.9177745	Item Models: compendiummod
+// 1.21.1	2026-03-09T21:16:32.8506938	Item Models: compendiummod
+611536bc87720de0530f638b4c3d29246e5831c4 assets/compendiummod/models/item/ascheriit_helmet.json
+8df72e687a60c46958a6ac1cfa8778625f02ed0c assets/compendiummod/models/item/ascheriit_helmet_quartz_trim.json
 654cc8d68bf66e9a49a32892013db37cfc0926ee assets/compendiummod/models/item/consume_spell.json
 d5c40ba8f8a4f250851288ee65d6e3c62b62dcc3 assets/compendiummod/models/item/dawnbreaker_blade.json
 f52d62a3a58b69f757c80a784161bcd4b1302fac assets/compendiummod/models/item/dawnbreaker_hilt.json
@@ -9,3 +11,5 @@ c16175a6e46b165c2341d8717ad067d38a3d9085 assets/compendiummod/models/item/old_sp
 25f911678619dbfa86b292ab24dc422d8d426644 assets/compendiummod/models/item/reverse_cursed_technique_spell.json
 48a4ce15ce6e27a1a030893b7a7417e32cfc068b assets/compendiummod/models/item/starfire_protocol_chestplate.json
 c91e9436b5ffd75bbc176409bfc9437e867df2ba assets/compendiummod/models/item/starfire_protocol_chestplate_quartz_trim.json
+0fad36bf5f9b5d0d88ba4437826feb2dbb8b1e31 assets/compendiummod/models/item/yumiko_boots.json
+982f4fc5003f55a3f0fa501986df8442a61c733c assets/compendiummod/models/item/yumiko_boots_quartz_trim.json

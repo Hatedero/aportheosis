@@ -2,6 +2,8 @@ package com.hatedero.compendiummod.datagen;
 
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.item.ModItems;
+import com.hatedero.compendiummod.item.custom.BootsItem;
+import com.hatedero.compendiummod.item.custom.MaskItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -48,6 +50,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.DAWNBREAKER_BLADE.get());
         basicItem(ModItems.DAWNBREAKER_TIP.get());
         trimmedArmorItem(ModItems.STARFIRE_PROTOCOL);
+        trimmedArmorMaskItem(ModItems.ASCHERIIT_MASK);
+        trimmedArmorBootsItem(ModItems.YUMIKO_BOOTS);
     }
 
     private void trimmedArmorItem(DeferredItem<ArmorItem> itemDeferredItem) {
@@ -61,6 +65,82 @@ public class ModItemModelProvider extends ItemModelProvider {
                     case HEAD -> "helmet";
                     case CHEST -> "chestplate";
                     case LEGS -> "leggings";
+                    case FEET -> "boots";
+                    default -> "";
+                };
+
+                String armorItemPath = armorItem.toString();
+                String trimPath = "trims/items/" + armorType + "_trim_" + trimMaterial.location().getPath();
+                String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
+                ResourceLocation armorItemResLoc = ResourceLocation.parse(armorItemPath);
+                ResourceLocation trimResLoc = ResourceLocation.parse(trimPath); // minecraft namespace
+                ResourceLocation trimNameResLoc = ResourceLocation.parse(currentTrimName);
+
+                existingFileHelper.trackGenerated(trimResLoc, PackType.CLIENT_RESOURCES, ".png", "textures");
+
+                getBuilder(currentTrimName)
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", armorItemResLoc.getNamespace() + ":item/" + armorItemResLoc.getPath())
+                        .texture("layer1", trimResLoc);
+
+                this.withExistingParent(itemDeferredItem.getId().getPath(),
+                                mcLoc("item/generated"))
+                        .override()
+                        .model(new ModelFile.UncheckedModelFile(trimNameResLoc.getNamespace()  + ":item/" + trimNameResLoc.getPath()))
+                        .predicate(mcLoc("trim_type"), trimValue).end()
+                        .texture("layer0",
+                                ResourceLocation.fromNamespaceAndPath(MOD_ID,
+                                        "item/" + itemDeferredItem.getId().getPath()));
+            });
+        }
+    }
+
+    private void trimmedArmorMaskItem(DeferredItem<MaskItem> itemDeferredItem) {
+        final String MOD_ID = CompendiumMod.MODID;
+
+        if(itemDeferredItem.get() instanceof ArmorItem armorItem) {
+            trimMaterials.forEach((trimMaterial, value) -> {
+                float trimValue = value;
+
+                String armorType = switch (armorItem.getEquipmentSlot()) {
+                    case HEAD -> "helmet";
+                    default -> "";
+                };
+
+                String armorItemPath = armorItem.toString();
+                String trimPath = "trims/items/" + armorType + "_trim_" + trimMaterial.location().getPath();
+                String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
+                ResourceLocation armorItemResLoc = ResourceLocation.parse(armorItemPath);
+                ResourceLocation trimResLoc = ResourceLocation.parse(trimPath); // minecraft namespace
+                ResourceLocation trimNameResLoc = ResourceLocation.parse(currentTrimName);
+
+                existingFileHelper.trackGenerated(trimResLoc, PackType.CLIENT_RESOURCES, ".png", "textures");
+
+                getBuilder(currentTrimName)
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", armorItemResLoc.getNamespace() + ":item/" + armorItemResLoc.getPath())
+                        .texture("layer1", trimResLoc);
+
+                this.withExistingParent(itemDeferredItem.getId().getPath(),
+                                mcLoc("item/generated"))
+                        .override()
+                        .model(new ModelFile.UncheckedModelFile(trimNameResLoc.getNamespace()  + ":item/" + trimNameResLoc.getPath()))
+                        .predicate(mcLoc("trim_type"), trimValue).end()
+                        .texture("layer0",
+                                ResourceLocation.fromNamespaceAndPath(MOD_ID,
+                                        "item/" + itemDeferredItem.getId().getPath()));
+            });
+        }
+    }
+
+    private void trimmedArmorBootsItem(DeferredItem<BootsItem> itemDeferredItem) {
+        final String MOD_ID = CompendiumMod.MODID;
+
+        if(itemDeferredItem.get() instanceof ArmorItem armorItem) {
+            trimMaterials.forEach((trimMaterial, value) -> {
+                float trimValue = value;
+
+                String armorType = switch (armorItem.getEquipmentSlot()) {
                     case FEET -> "boots";
                     default -> "";
                 };

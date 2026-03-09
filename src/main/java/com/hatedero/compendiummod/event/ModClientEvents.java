@@ -2,6 +2,7 @@ package com.hatedero.compendiummod.event;
 
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.entity.ModEntities;
+import com.hatedero.compendiummod.item.custom.MaskModel;
 import com.hatedero.compendiummod.mana.GUI.ManaHudOverlay;
 import com.hatedero.compendiummod.mana.ModAttributes;
 import com.hatedero.compendiummod.mana.spell.Spell;
@@ -35,6 +36,11 @@ public class ModClientEvents {
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         handleShowMana(event);
         handleSpellCharging(event);
+    }
+
+    @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(MyModelLayers.MASK_LAYER, MaskModel::createLayer);
     }
 
     public static void handleShowMana(PlayerTickEvent.Post event) {

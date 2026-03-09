@@ -30,6 +30,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DAWNBREAKER_BLADE.get());
                         output.accept(ModItems.DAWNBREAKER_TIP.get());
                         output.accept(ModItems.STARFIRE_PROTOCOL.get());
+                        output.accept(ModItems.ASCHERIIT_MASK.get());
+                        output.accept(ModItems.YUMIKO_BOOTS.get());
                         output.accept(ModItems.CONSUME_SPELL.get());
                         output.accept(ModItems.REVERSE_CURSED_TECHNIQUE_SPELL.get());
                     }).build());

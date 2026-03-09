@@ -1,9 +1,7 @@
 package com.hatedero.compendiummod.item;
 
 import com.hatedero.compendiummod.CompendiumMod;
-import com.hatedero.compendiummod.item.custom.BlockingSwordItem;
-import com.hatedero.compendiummod.item.custom.FuelItem;
-import com.hatedero.compendiummod.item.custom.SpearItem;
+import com.hatedero.compendiummod.item.custom.*;
 import com.hatedero.compendiummod.item.custom.spells.ReverseCursedTechniqueSpellItem;
 import com.hatedero.compendiummod.item.custom.spells.SpellItem;
 import com.hatedero.compendiummod.mana.ModAttributes;
@@ -22,6 +20,21 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterials.STARFIRE_PROTOCOL_AM, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(40))));
 
+    public static final DeferredItem<MaskItem> ASCHERIIT_MASK = ITEMS.register("ascheriit_helmet",
+            () -> new MaskItem(
+                    ModArmorMaterials.ASCHERIIT_AM,
+                    ArmorItem.Type.HELMET,
+                    new Item.Properties()
+            )
+            );
+
+    public static final DeferredItem<BootsItem> YUMIKO_BOOTS = ITEMS.register("yumiko_boots",
+            () -> new BootsItem(
+                    ModArmorMaterials.YUMIKO_AM,
+                    ArmorItem.Type.BOOTS,
+                    new Item.Properties()
+            )
+    );
     public static final DeferredItem<Item> CORE = ITEMS.register("core",
             () -> new Item(new Item.Properties()));
 
