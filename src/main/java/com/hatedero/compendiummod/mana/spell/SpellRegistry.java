@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.entity.ModEntityBehavior;
 import com.hatedero.compendiummod.mana.spell.spells.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -44,19 +45,19 @@ public class SpellRegistry {
             () -> new BlinkSpell(1));
 
     public static final DeferredHolder<Spell, Spell> GRAVITY_ZONE = SPELLS.register("gravity_zone",
-            () -> new GravityZoneSpell(1, 1, 10, false));
+            () -> new GravityZoneSpell(1, 1, 5));
 
     public static final DeferredHolder<Spell, Spell> ANTI_GRAVITY_ZONE = SPELLS.register("anti_gravity_zone",
-            () -> new GravityZoneSpell(1, -1, 10, true));
+            () -> new GravityZoneSpell(1, -1, 5));
 
     public static final DeferredHolder<Spell, Spell> INFINITY = SPELLS.register("infinity",
             () -> new InfinitySpell(1, 5));
 
     public static final DeferredHolder<Spell, Spell> BLUE = SPELLS.register("blue",
-            () -> new BlueSpell( 5));
+            () -> new BlueSpell( 5, ModEntityBehavior.THROWN));
 
     public static final DeferredHolder<Spell, Spell> HANDHELD_BLUE = SPELLS.register("handheld_blue",
-            () -> new HandheldBlueSpell( 5));
+            () -> new BlueSpell( 5, ModEntityBehavior.ENTITY_ATTACHED));
 
     public static final DeferredHolder<Spell, Spell> RED = SPELLS.register("red",
             () -> new RedSpell(5));

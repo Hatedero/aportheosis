@@ -29,6 +29,7 @@ public class BlueProjectile extends AbstractHurtingProjectile {
     private int age = 0;
     private static final int MAX_LIFE = 100;
     private double attractionForce = 0.5D;
+    private double radius = 1D;
     private ModEntityBehavior behavior;
 
     public BlueProjectile(EntityType<? extends BlueProjectile> type, Level level, ModEntityBehavior behavior) {
@@ -75,8 +76,6 @@ public class BlueProjectile extends AbstractHurtingProjectile {
         }
 
         if (!this.level().isClientSide()) {
-
-            double radius = 2D;
 
             AABB area = this.getBoundingBox().inflate(radius);
 

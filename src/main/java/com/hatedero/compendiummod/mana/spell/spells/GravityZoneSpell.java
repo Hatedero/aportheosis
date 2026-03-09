@@ -17,13 +17,11 @@ import static com.hatedero.compendiummod.mana.ModAttachments.MANA;
 public class GravityZoneSpell extends Spell {
     float strength;
     float range;
-    boolean includePlayer;
 
-    public GravityZoneSpell(float costPerTick, float strength, float range, boolean includePlayer) {
+    public GravityZoneSpell(float costPerTick, float strength, float range) {
         super(costPerTick);
         this.strength = strength;
         this.range = range;
-        this.includePlayer = includePlayer;
     }
 
     @Override
@@ -41,9 +39,6 @@ public class GravityZoneSpell extends Spell {
                 AABB area = player.getBoundingBox().inflate(range);
 
                 List<Entity> entities = level.getEntities(player, area);
-
-                if(includePlayer)
-                    entities.add(player);
 
                 for (Entity target : entities) {
                     target.setDeltaMovement(target.getDeltaMovement().x,-strength,target.getDeltaMovement().z);

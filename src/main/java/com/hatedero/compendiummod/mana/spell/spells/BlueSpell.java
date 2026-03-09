@@ -19,8 +19,11 @@ import net.minecraft.world.phys.*;
 import static com.hatedero.compendiummod.entity.ModEntities.ENTITIES;
 
 public class BlueSpell extends Spell {
-    public BlueSpell(float costPerTick) {
+    private ModEntityBehavior behavior;
+
+    public BlueSpell(float costPerTick, ModEntityBehavior behavior) {
         super(costPerTick);
+        this.behavior = behavior;
     }
 
     @Override
@@ -47,9 +50,8 @@ public class BlueSpell extends Spell {
     @Override
     public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
         if (!level.isClientSide() && livingEntity instanceof Player player && remainingUseDuration >= 60) {
-            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, ModEntityBehavior.ENTITY_ATTACHED);
+            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, behavior);
             projectile.setOwner(player);
-            projectile.setBehavior(ModEntityBehavior.THROWN);
             Vec3 eyePos = getPointInFront(livingEntity, 1);
             projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());
 

@@ -18,11 +18,11 @@ public class ManaEventHandler {
             Double manaRegen = player.getAttributeValue(ModAttributes.MANA_REGEN)/20;
             Double manaInput = player.getAttributeValue(ModAttributes.MANA_INPUT);
 
-            if (currentMana < maxMana) {
+            if (currentMana < maxMana)
                 player.setData(ModAttachments.MANA, currentMana + (manaRegen * manaInput));
-                if (player.getData(ModAttachments.MANA) > maxMana)
-                    player.setData(ModAttachments.MANA, maxMana);
-            }
+
+            if (currentMana > maxMana)
+                player.setData(ModAttachments.MANA, maxMana);
         }
     }
 }
