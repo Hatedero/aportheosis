@@ -50,8 +50,10 @@ public class BlueProjectile extends AbstractHurtingProjectile {
             }
         }
 
-        /*switch (behavior) {
-            case ModEntityBehavior.ENTITY_ATTACHED -> {
+        if(behavior == null) return;
+
+        switch (behavior) {
+            case ENTITY_ATTACHED -> {
                 if (!this.level().isClientSide()) {
                     Entity owner = getOwner();
                     if (owner instanceof Player player) {
@@ -59,7 +61,7 @@ public class BlueProjectile extends AbstractHurtingProjectile {
                     }
                 }
             }
-            case THROWN -> {*/
+            case THROWN -> {
                 super.tick();
                 Vec3 movement = this.getDeltaMovement();
                 double speedLimit = 0.5D;
@@ -69,12 +71,12 @@ public class BlueProjectile extends AbstractHurtingProjectile {
                         this.setDeltaMovement(movement.normalize().scale(speedLimit));
                     }
                 }
-            //}
-        //}
+            }
+        }
 
         if (!this.level().isClientSide()) {
 
-            double radius = 3D;
+            double radius = 2D;
 
             AABB area = this.getBoundingBox().inflate(radius);
 
