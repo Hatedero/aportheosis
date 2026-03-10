@@ -57,8 +57,4 @@ public abstract class Spell{
         }
         return false;
     }
-
-    public String getTranslationKey() {
-        return "spell." + CompendiumMod.MODID + ".";
-    }
 }
