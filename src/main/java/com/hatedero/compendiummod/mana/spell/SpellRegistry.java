@@ -61,4 +61,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> RED = SPELLS.register("red",
             () -> new RedSpell(5));
+
+    public static final DeferredHolder<Spell, Spell> WALLRUN = SPELLS.register("wallrun",
+            () -> new WallRunSpell(1));
 }
