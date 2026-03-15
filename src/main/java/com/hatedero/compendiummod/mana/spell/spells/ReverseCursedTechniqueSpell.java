@@ -23,6 +23,7 @@ public class ReverseCursedTechniqueSpell extends Spell {
     @Override
     public void chargeTick(Level level, LivingEntity livingEntity, int remainingUseDuration) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
+
             if (canUseMana(livingEntity)) {
                 double cost = (costPerTick * (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * (player.getAttributeValue(ModAttributes.MANA_OUTPUT)))) / 20;
                 player.setData(MANA, player.getData(MANA) - cost);

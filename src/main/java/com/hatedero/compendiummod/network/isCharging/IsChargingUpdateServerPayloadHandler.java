@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.network.isCharging;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -13,8 +14,9 @@ public class IsChargingUpdateServerPayloadHandler {
         if (data.value()) {
             Player player = context.player();
 
-            if (player != null && !player.getData(IS_CHARGING) && player.getData(CAST_COOLDOWN) <= 0)
+            if (player != null && !player.getData(IS_CHARGING) && player.getData(CAST_COOLDOWN) <= 0) {
                 player.setData(IS_CHARGING, true);
+            }
         } else {
             context.player().setData(IS_CHARGING, false);
         }

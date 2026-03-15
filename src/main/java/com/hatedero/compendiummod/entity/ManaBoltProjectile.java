@@ -40,9 +40,6 @@ public class ManaBoltProjectile extends AbstractHurtingProjectile {
     @Override
     public void tick() {
         if (!this.level().isClientSide()) {
-            if (getOwner() instanceof ServerPlayer player)
-                player.sendSystemMessage(Component.literal(String.valueOf(age)));
-
             if (level() instanceof ServerLevel serverLevel)
                 serverLevel.sendParticles(
                         ParticleTypes.FLAME,

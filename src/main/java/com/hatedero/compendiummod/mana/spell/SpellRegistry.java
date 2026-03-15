@@ -64,4 +64,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> REFLECT_BARRIER = SPELLS.register("reflect_barrier",
             () -> new ReflectBarrierSpell(10, 3));
+
+    public static final DeferredHolder<Spell, Spell> REPAIR_ITEM = SPELLS.register("repair_item",
+            () -> new RepairItemSpell(50));
 }

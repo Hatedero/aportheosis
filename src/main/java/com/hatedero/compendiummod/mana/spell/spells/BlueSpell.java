@@ -33,7 +33,7 @@ public class BlueSpell extends Spell {
 
     @Override
     public void chargeTick(Level level, LivingEntity livingEntity, int remainingUseDuration) {
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
+        if (level instanceof ServerLevel serverLevel) {
             Vec3 eyePos = getPointInFront(livingEntity, 1);
 
             serverLevel.sendParticles(

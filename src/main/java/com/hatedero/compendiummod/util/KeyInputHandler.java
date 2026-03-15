@@ -14,8 +14,6 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
-import static com.hatedero.compendiummod.mana.ModAttachments.*;
-
 @EventBusSubscriber(modid = CompendiumMod.MODID, value = Dist.CLIENT)
 public class KeyInputHandler {
     @SubscribeEvent
@@ -29,7 +27,7 @@ public class KeyInputHandler {
                     PacketDistributor.sendToServer(new IsChargingUpdatePayload(true));
                 }
             } else if (ModKeybinds.OPEN_SPELL_MENU.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
-                Minecraft.getInstance().setScreen(new SpellScreen(Component.literal("My Mod Menu")));
+                Minecraft.getInstance().setScreen(new SpellScreen(Component.literal("Spell List")));
             }
         } else if (event.getAction() == GLFW.GLFW_RELEASE) {
             if (ModKeybinds.CHARGE_SPELL_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
