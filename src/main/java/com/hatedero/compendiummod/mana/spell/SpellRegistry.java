@@ -35,9 +35,6 @@ public class SpellRegistry {
     public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
             () -> new ReverseCursedTechniqueSpell(5));
 
-    public static final DeferredHolder<Spell, Spell> DISMANTLE = SPELLS.register("dismantle",
-            () -> new DismantleSpell(3));
-
     public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
             () -> new DashSpell(1));
 
@@ -50,9 +47,6 @@ public class SpellRegistry {
     public static final DeferredHolder<Spell, Spell> ANTI_GRAVITY_ZONE = SPELLS.register("anti_gravity_zone",
             () -> new GravityZoneSpell(1, -1, 5));
 
-    public static final DeferredHolder<Spell, Spell> INFINITY = SPELLS.register("infinity",
-            () -> new InfinitySpell(1, 5));
-
     public static final DeferredHolder<Spell, Spell> BLUE = SPELLS.register("blue",
             () -> new BlueSpell( 5, ModEntityBehavior.THROWN));
 
@@ -64,4 +58,7 @@ public class SpellRegistry {
 
     public static final DeferredHolder<Spell, Spell> WALLRUN = SPELLS.register("wallrun",
             () -> new WallRunSpell(1));
+
+    public static final DeferredHolder<Spell, Spell> MANA_BOLT = SPELLS.register("mana_bolt",
+            () -> new ManaBoltSpell(10));
 }

@@ -1,6 +1,5 @@
 package com.hatedero.compendiummod.network.isCharging;
 
-import com.hatedero.compendiummod.network.showMana.ShowManaUpdatePayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import static com.hatedero.compendiummod.mana.ModAttachments.IS_CHARGING;

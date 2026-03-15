@@ -7,16 +7,16 @@ import net.neoforged.neoforge.attachment.IAttachmentHolder;
 
 import javax.annotation.Nullable;
 
-public class IsChargingSyncHandler implements AttachmentSyncHandler<Boolean> {
+public class IntSyncHandler implements AttachmentSyncHandler<Integer> {
 
     @Override
-    public void write(RegistryFriendlyByteBuf buf, Boolean attachment, boolean initialSync) {
-        buf.writeBoolean(attachment);
+    public void write(RegistryFriendlyByteBuf buf, Integer attachment, boolean initialSync) {
+        buf.writeInt(attachment);
     }
 
     @Override
-    public Boolean read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Boolean previousValue) {
-        return buf.readBoolean();
+    public Integer read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Integer previousValue) {
+        return buf.readInt();
     }
 
     @Override

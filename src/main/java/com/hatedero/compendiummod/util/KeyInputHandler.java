@@ -3,7 +3,6 @@ package com.hatedero.compendiummod.util;
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.mana.GUI.SpellScreen;
 import com.hatedero.compendiummod.network.isCharging.IsChargingUpdatePayload;
-import com.hatedero.compendiummod.network.showMana.ShowManaUpdatePayload;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -24,17 +23,7 @@ public class KeyInputHandler {
         if (Minecraft.getInstance().screen != null)
             return;
         if (event.getAction() == GLFW.GLFW_PRESS) {
-
-            if (ModKeybinds.SHOW_MANA_ACTION_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
-
-                LocalPlayer player = Minecraft.getInstance().player;
-                if (player != null) {
-                    Boolean newValue = !player.getData(SHOW_MANA);
-                    player.displayClientMessage(Component.literal("Switched mana visibility to " + newValue), true);
-                    PacketDistributor.sendToServer(new ShowManaUpdatePayload(newValue));
-
-                }
-            } else if (ModKeybinds.CHARGE_SPELL_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
+            if (ModKeybinds.CHARGE_SPELL_KEY.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
                 LocalPlayer player = Minecraft.getInstance().player;
                 if (player != null) {
                     PacketDistributor.sendToServer(new IsChargingUpdatePayload(true));

@@ -1,4 +1,4 @@
-package com.hatedero.compendiummod.event;
+package com.hatedero.compendiummod.item.custom;
 
 import com.hatedero.compendiummod.CompendiumMod;
 import net.minecraft.client.model.geom.ModelLayerLocation;

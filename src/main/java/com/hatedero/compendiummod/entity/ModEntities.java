@@ -26,6 +26,13 @@ public class ModEntities {
                     .updateInterval(10)
                     .build("red_projectile"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<ManaBoltProjectile>> MANA_BOLT_PROJECTILE =
+            ENTITIES.register("mana_bolt_projectile", () -> EntityType.Builder.<ManaBoltProjectile>of(ManaBoltProjectile::new, MobCategory.MISC)
+                    .sized(0.2F,0.2F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .build("mana_bolt_projectile"));
+
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

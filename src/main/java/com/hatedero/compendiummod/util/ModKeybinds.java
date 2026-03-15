@@ -11,13 +11,6 @@ import java.util.List;
 public class ModKeybinds {
     public static final String KEY_CATEGORY = "key.categories."+ CompendiumMod.MODID;
 
-    public static final KeyMapping SHOW_MANA_ACTION_KEY = new KeyMapping(
-            "key."+CompendiumMod.MODID+".show_mana_action",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_G,
-            KEY_CATEGORY
-    );
-
     public static final KeyMapping CHARGE_SPELL_KEY = new KeyMapping(
             "key."+CompendiumMod.MODID+".charge_spell",
             InputConstants.Type.KEYSYM,
@@ -32,7 +25,8 @@ public class ModKeybinds {
             KEY_CATEGORY
     );
 
-    public static final KeyMapping ULTIMATE_KEY = new KeyMapping(
+    //TODO
+    /*public static final KeyMapping ULTIMATE_KEY = new KeyMapping(
             "key."+CompendiumMod.MODID+".ultimate",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
@@ -58,5 +52,5 @@ public class ModKeybinds {
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
             KEY_CATEGORY
-    );
+    );*/
 }

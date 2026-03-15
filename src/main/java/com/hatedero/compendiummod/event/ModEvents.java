@@ -20,45 +20,8 @@ import static com.hatedero.compendiummod.mana.ModAttachments.*;
 import static com.hatedero.compendiummod.mana.spell.SpellRegistry.SPELLS;
 import static com.hatedero.compendiummod.mana.spell.SpellRegistry.getSpell;
 
-@EventBusSubscriber(modid = CompendiumMod.MODID)
+/*@EventBusSubscriber(modid = CompendiumMod.MODID)
 public class ModEvents {
 
-    @SubscribeEvent
-    public static void modifyDefaultAttributes(EntityAttributeModificationEvent event) {
-        ModAttributes.ATTRIBUTES.getEntries().forEach(entry -> {
-            event.add(
-                    EntityType.PLAYER,
-                    entry
-            );
-        });
-    }
 
-    @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Post event) {
-        Player player = event.getEntity();
-        Level level = player.level();
-
-        if (!level.isClientSide) {
-            boolean isCharging = player.getData(ModAttachments.IS_CHARGING);
-            int manaCharged = player.getData(CHARGE_TIME);
-            int cooldown = player.getData(CAST_COOLDOWN);
-            Spell spell = getSpell(player.level(), player.getData(CURRENT_SPELL_ID));
-
-            if (spell == null) {
-                player.setData(IS_CHARGING, false);
-                player.setData(CHARGE_TIME, 0);
-                player.setData(CAST_COOLDOWN, 0);
-                return;
-            }
-
-            if (isCharging) {
-                player.setData(ModAttachments.CHARGE_TIME, player.getData(ModAttachments.CHARGE_TIME) + 1 );
-                spell.chargeTick(level, player, player.getData(ModAttachments.CHARGE_TIME));
-            } else if (cooldown > 0) {
-                player.setData(CAST_COOLDOWN,  cooldown - 1);
-            } else if (!isCharging && manaCharged > 0) {
-                spell.release(level, player, player.getData(ModAttachments.CHARGE_TIME));
-            }
-        }
-    }
-}
+}*/

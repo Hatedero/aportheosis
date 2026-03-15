@@ -1,4 +1,4 @@
-package com.hatedero.compendiummod.mana.packets;
+package com.hatedero.compendiummod.mana.packets.deprecated;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -6,17 +6,16 @@ import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 
 import javax.annotation.Nullable;
-
-public class ShowManaSyncHandler implements AttachmentSyncHandler<Boolean> {
+public class ManaSyncHandler implements AttachmentSyncHandler<Double> {
 
     @Override
-    public void write(RegistryFriendlyByteBuf buf, Boolean attachment, boolean initialSync) {
-        buf.writeBoolean(attachment);
+    public void write(RegistryFriendlyByteBuf buf, Double attachment, boolean initialSync) {
+        buf.writeDouble(attachment);
     }
 
     @Override
-    public Boolean read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Boolean previousValue) {
-        return buf.readBoolean();
+    public Double read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Double previousValue) {
+        return buf.readDouble();
     }
 
     @Override

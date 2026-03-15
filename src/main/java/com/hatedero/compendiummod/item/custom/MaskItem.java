@@ -1,6 +1,5 @@
 package com.hatedero.compendiummod.item.custom;
 
-import com.hatedero.compendiummod.event.MyModelLayers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Holder;

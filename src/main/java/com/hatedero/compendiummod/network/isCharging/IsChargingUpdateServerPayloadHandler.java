@@ -1,6 +1,5 @@
 package com.hatedero.compendiummod.network.isCharging;
 
-import com.hatedero.compendiummod.network.showMana.ShowManaUpdatePayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

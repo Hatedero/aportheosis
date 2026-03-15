@@ -7,16 +7,16 @@ import net.neoforged.neoforge.attachment.IAttachmentHolder;
 
 import javax.annotation.Nullable;
 
-public class ChargingSpellIdSyncHandler implements AttachmentSyncHandler<Integer> {
+public class StringSyncHandler implements AttachmentSyncHandler<String> {
 
     @Override
-    public void write(RegistryFriendlyByteBuf buf, Integer attachment, boolean initialSync) {
-        buf.writeInt(attachment);
+    public void write(RegistryFriendlyByteBuf buf, String attachment, boolean initialSync) {
+        buf.writeUtf(attachment, 32767);
     }
 
     @Override
-    public Integer read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable Integer previousValue) {
-        return buf.readInt();
+    public String read(IAttachmentHolder holder, RegistryFriendlyByteBuf buf, @Nullable String previousValue) {
+        return buf.readUtf(32767);
     }
 
     @Override
