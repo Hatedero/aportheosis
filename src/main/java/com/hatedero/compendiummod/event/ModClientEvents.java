@@ -82,8 +82,8 @@ public class ModClientEvents {
     public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(ModKeybinds.CHARGE_SPELL_KEY);
         event.register(ModKeybinds.OPEN_SPELL_MENU);
-        /*event.register(ModKeybinds.ULTIMATE_KEY);
-        event.register(ModKeybinds.ABILITY_ONE_KEY);
+        event.register(ModKeybinds.ULTIMATE_KEY);
+        /*event.register(ModKeybinds.ABILITY_ONE_KEY);
         event.register(ModKeybinds.ABILITY_TWO_KEY);
         event.register(ModKeybinds.ABILITY_THREE_KEY);*/
     }

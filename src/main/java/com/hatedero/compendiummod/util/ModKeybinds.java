@@ -26,7 +26,7 @@ public class ModKeybinds {
     );
 
     //TODO
-    /*public static final KeyMapping ULTIMATE_KEY = new KeyMapping(
+    public static final KeyMapping ULTIMATE_KEY = new KeyMapping(
             "key."+CompendiumMod.MODID+".ultimate",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
@@ -34,23 +34,23 @@ public class ModKeybinds {
     );
 
     public static final KeyMapping ABILITY_ONE_KEY = new KeyMapping(
-            "key."+CompendiumMod.MODID+".ability_one",
+            "key."+CompendiumMod.MODID+".ability_1",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
             KEY_CATEGORY
     );
 
     public static final KeyMapping ABILITY_TWO_KEY = new KeyMapping(
-            "key."+CompendiumMod.MODID+".ability_two",
+            "key."+CompendiumMod.MODID+".ability_2",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
             KEY_CATEGORY
     );
 
     public static final KeyMapping ABILITY_THREE_KEY = new KeyMapping(
-            "key."+CompendiumMod.MODID+".ability_three",
+            "key."+CompendiumMod.MODID+".ability_3",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
             KEY_CATEGORY
-    );*/
+    );
 }

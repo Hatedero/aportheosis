@@ -4,6 +4,9 @@ import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.network.CurrentSpellId.CurrentSpellIdUpdateClientPayloadHandler;
 import com.hatedero.compendiummod.network.CurrentSpellId.CurrentSpellIdUpdatePayload;
 import com.hatedero.compendiummod.network.CurrentSpellId.CurrentSpellIdUpdateServerPayloadHandler;
+import com.hatedero.compendiummod.network.SpellData.SpellDataUpdateClientPayloadHandler;
+import com.hatedero.compendiummod.network.SpellData.SpellDataUpdatePayload;
+import com.hatedero.compendiummod.network.SpellData.SpellDataUpdateServerPayloadHandler;
 import com.hatedero.compendiummod.network.isCharging.IsChargingUpdateClientPayloadHandler;
 import com.hatedero.compendiummod.network.isCharging.IsChargingUpdatePayload;
 import com.hatedero.compendiummod.network.isCharging.IsChargingUpdateServerPayloadHandler;
@@ -33,6 +36,14 @@ public class ModNetworking {
                 new DirectionalPayloadHandler<>(
                         CurrentSpellIdUpdateClientPayloadHandler::handleDataOnMain,
                         CurrentSpellIdUpdateServerPayloadHandler::handleDataOnMain
+                )
+        );
+        registrar.playBidirectional(
+                SpellDataUpdatePayload.TYPE,
+                SpellDataUpdatePayload.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        SpellDataUpdateClientPayloadHandler::handleDataOnMain,
+                        SpellDataUpdateServerPayloadHandler::handleDataOnMain
                 )
         );
     }

@@ -2,15 +2,15 @@ package com.hatedero.compendiummod.mana;
 
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.mana.packets.*;
-import com.hatedero.compendiummod.mana.packets.deprecated.CurrentSpellIdSyncHandler;
-import com.hatedero.compendiummod.mana.packets.deprecated.IsChargingSyncHandler;
-import com.hatedero.compendiummod.mana.packets.deprecated.ManaSyncHandler;
+import com.hatedero.compendiummod.mana.spell.spellslot.PlayerSpellData;
 import com.mojang.serialization.Codec;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
+import java.util.function.Supplier;
 
 public class ModAttachments {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CompendiumMod.MODID);
@@ -59,6 +59,13 @@ public class ModAttachments {
                     .sync(new IntSyncHandler())
                     .build()
     );
+
+    public static final Supplier<AttachmentType<PlayerSpellData>> SPELL_DATA =
+            ATTACHMENT_TYPES.register("spell_data", () -> AttachmentType.builder(() -> PlayerSpellData.empty())
+                    .serialize(PlayerSpellData.CODEC)
+                    .sync(new SpellDataSyncHandler())
+                    .copyOnDeath()
+                    .build());
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);

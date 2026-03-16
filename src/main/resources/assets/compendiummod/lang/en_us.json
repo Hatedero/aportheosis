@@ -35,7 +35,6 @@
   "key.compendiummod.ability_two": "Ability 2",
   "key.compendiummod.ability_three": "Ability 3",
 
-
   "spell.compendiummod.blue": "Blue",
   "spell.compendiummod.handheld_blue": "Handheld Blue",
   "spell.compendiummod.red": "Red",
@@ -49,5 +48,11 @@
   "spell.compendiummod.wallrun": "Wall Run",
   "spell.compendiummod.mana_bolt": "Mana Bolt",
   "spell.compendiummod.reflect_barrier": "Reflective Barrier",
-  "spell.compendiummod.repair_item": "Repair Item"
+  "spell.compendiummod.repair_item": "Repair Item",
+  "spell.compendiummod.empty": "Empty",
+
+  "slot.compendiummod.ultimate": "Ultimate",
+  "slot.compendiummod.ability_1": "Ability 1",
+  "slot.compendiummod.ability_2": "Ability 2",
+  "slot.compendiummod.ability_3": "Ability 3"
 }

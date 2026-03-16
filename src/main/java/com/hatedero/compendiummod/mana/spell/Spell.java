@@ -1,20 +1,12 @@
 package com.hatedero.compendiummod.mana.spell;
 
-import com.hatedero.compendiummod.CompendiumMod;
-import com.hatedero.compendiummod.CompendiumModClient;
 import com.hatedero.compendiummod.mana.ModAttributes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
-import java.util.Map;
 
 import static com.hatedero.compendiummod.mana.ModAttachments.*;
 import static com.hatedero.compendiummod.mana.ModAttachments.CHARGE_TIME;
-import static com.hatedero.compendiummod.mana.spell.SpellRegistry.SPELLS;
 
 public abstract class Spell{
     protected float costPerTick;

@@ -1,12 +1,17 @@
 package com.hatedero.compendiummod.mana.GUI;
 
+import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.mana.ModAttachments;
 import com.hatedero.compendiummod.mana.ModAttributes;
+import com.hatedero.compendiummod.mana.spell.spellslot.PlayerSpellData;
+import com.hatedero.compendiummod.mana.spell.spellslot.SpellSlotData;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.neoforged.fml.common.Mod;
 
 import java.text.DecimalFormat;
 
@@ -57,6 +62,26 @@ public class ManaHudOverlay implements LayeredDraw.Layer {
             guiGraphics.fill(x, y, x + currentProgressWidth, y + barHeight, 0xAAFFFFFF);
 
             guiGraphics.renderOutline(x - 1, y - 1, barWidth + 2, barHeight + 2, 0xAAFFFFFF);
+        }
+
+        PlayerSpellData data = player.getData(ModAttachments.SPELL_DATA);
+        if (data.slots().isEmpty()) return;
+
+        x = 2;
+        y = guiGraphics.guiHeight() / 2;
+        int lineHeight = 12;
+
+        y -= (data.slots().size() * lineHeight) / 2;
+
+        for (SpellSlotData slot : data.slots()) {
+            String slotName = Component.translatable("slot." + CompendiumMod.MODID + "." + slot.slotName()).getString();
+            String spellName = Component.translatable("spell." + CompendiumMod.MODID + "." + slot.spellId()).getString();
+
+            text = String.format("%s : %s | %dt", slotName, spellName, slot.cooldown());
+
+            guiGraphics.drawString(minecraft.font, text, x, y, 0xFFFFFF);
+
+            y += lineHeight;
         }
     }
 }
