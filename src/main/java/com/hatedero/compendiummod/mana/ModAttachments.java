@@ -52,14 +52,6 @@ public class ModAttachments {
                     .build()
     );
 
-    //TODO
-    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> CHARGING_SPELL_ID = ATTACHMENT_TYPES.register(
-            "charging_spell_id", () -> AttachmentType.builder(() -> 0)
-                    .serialize(Codec.INT)
-                    .sync(new IntSyncHandler())
-                    .build()
-    );
-
     public static final Supplier<AttachmentType<PlayerSpellData>> SPELL_DATA =
             ATTACHMENT_TYPES.register("spell_data", () -> AttachmentType.builder(() -> PlayerSpellData.empty())
                     .serialize(PlayerSpellData.CODEC)

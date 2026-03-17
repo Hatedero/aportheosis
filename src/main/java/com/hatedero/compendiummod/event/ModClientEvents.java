@@ -60,17 +60,7 @@ public class ModClientEvents {
             if (spell == null || spell instanceof EmptySpell) return;
 
             String translationKey = "spell." + SPELLS.getRegistry().get().getKey(spell).toLanguageKey();
-            player.displayClientMessage(Component.literal("CHARGED ").append(Component.translatable(translationKey)).append(Component.literal(" WITH : " + slot.chargeLevel() )), true);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerRender(RenderPlayerEvent.Pre event) {
-        Player player = event.getEntity();
-
-        if (player.getData(IS_CHARGING)) {
-            event.getRenderer().getModel().rightArmPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
-            event.getRenderer().getModel().leftArmPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
+            player.displayClientMessage(Component.literal("CHARGING ").append(Component.translatable(translationKey)).append(Component.literal(" : " + slot.chargeLevel() )), true);
         }
     }
 
@@ -90,7 +80,6 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent event) {
-        //event.register(ModKeybinds.CHARGE_SPELL_KEY);
         event.register(ModKeybinds.OPEN_SPELL_MENU);
         event.register(ModKeybinds.ULTIMATE_KEY);
         event.register(ModKeybinds.ABILITY_ONE_KEY);
