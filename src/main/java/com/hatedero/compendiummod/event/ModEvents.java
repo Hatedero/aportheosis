@@ -49,12 +49,12 @@ public class ModEvents {
             if (!hasSlot) {
                 updatedSlots.add(new SpellSlotData(
                         slot,
-                        "blue",
+                        "debug",
                         0,
                         0
                 ));
 
-                player.setData(ModAttachments.SPELL_DATA, new PlayerSpellData(List.copyOf(updatedSlots), ""));
+                player.setData(ModAttachments.SPELL_DATA, new PlayerSpellData(updatedSlots, ""));
 
                 player.sendSystemMessage(Component.literal( "Added " + slot + " spell slot to " + player.getName().getString()));
             }

@@ -50,6 +50,7 @@
   "spell.compendiummod.reflect_barrier": "Reflective Barrier",
   "spell.compendiummod.repair_item": "Repair Item",
   "spell.compendiummod.empty": "Empty",
+  "spell.compendiummod.debug": "Debug",
 
   "slot.compendiummod.ultimate": "Ultimate",
   "slot.compendiummod.ability_1": "Ability 1",

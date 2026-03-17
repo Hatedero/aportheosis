@@ -6,6 +6,7 @@ import com.hatedero.compendiummod.mana.spell.spells.*;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -33,14 +34,20 @@ public class SpellRegistry {
     }
 
     public static final DeferredHolder<Spell, Spell> EMPTY = SPELLS.register("empty",
-            () -> new EmptySpell(0) {
+            () -> new EmptySpell(0, 0, 100) {
                 @Override
-                public int getUseDuration() {
-                    return 0;
+                public void chargeEffect(Level level, Player player, int manaLevel) {
+                }
+
+                @Override
+                public void releaseEffect(Level level, Player player, int manaLevel) {
                 }
             });
 
-    public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
+    public static final DeferredHolder<Spell, Spell> DEBUG = SPELLS.register("debug",
+            () -> new DebugSpell(1, 200, 100));
+
+    /*public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
             () -> new ReverseCursedTechniqueSpell(5));
 
     public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
@@ -74,5 +81,5 @@ public class SpellRegistry {
             () -> new ReflectBarrierSpell(10, 3));
 
     public static final DeferredHolder<Spell, Spell> REPAIR_ITEM = SPELLS.register("repair_item",
-            () -> new RepairItemSpell(50));
+            () -> new RepairItemSpell(50));*/
 }

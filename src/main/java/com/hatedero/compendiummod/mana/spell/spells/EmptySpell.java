@@ -10,8 +10,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class EmptySpell extends Spell {
-    public EmptySpell(float costPerTick) {
-        super(costPerTick);
+    public EmptySpell(int minManaCostPerTick, int maxManaCharge, int cooldown) {
+        super(minManaCostPerTick, maxManaCharge, cooldown);
     }
-
 }

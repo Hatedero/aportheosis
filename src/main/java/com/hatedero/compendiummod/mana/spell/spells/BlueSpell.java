@@ -1,76 +1,76 @@
-package com.hatedero.compendiummod.mana.spell.spells;
-
-import com.hatedero.compendiummod.entity.BlueProjectile;
-import com.hatedero.compendiummod.entity.ModEntities;
-import com.hatedero.compendiummod.entity.ModEntityBehavior;
-import com.hatedero.compendiummod.mana.ModAttachments;
-import com.hatedero.compendiummod.mana.ModAttributes;
-import com.hatedero.compendiummod.mana.spell.Spell;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.*;
-
-import static com.hatedero.compendiummod.entity.ModEntities.ENTITIES;
-
-public class BlueSpell extends Spell {
-    private ModEntityBehavior behavior;
-
-    public BlueSpell(float costPerTick, ModEntityBehavior behavior) {
-        super(costPerTick);
-        this.behavior = behavior;
-    }
-
-    @Override
-    public int getUseDuration() {
-        return 100;
-    }
-
-    @Override
-    public void chargeTick(Level level, LivingEntity livingEntity, int remainingUseDuration) {
-        if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
-            Vec3 eyePos = getPointInFront(livingEntity, 1);
-
-            serverLevel.sendParticles(
-                    ParticleTypes.GLOW,
-                    eyePos.x, eyePos.y, eyePos.z,
-                    remainingUseDuration/20,
-                    0.05, 0.05, 0.05,
-                    0.01
-            );
-        }
-        super.chargeTick(level, livingEntity, remainingUseDuration);
-    }
-
-    @Override
-    public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
-        if (!level.isClientSide() && livingEntity instanceof Player player && remainingUseDuration >= 60) {
-            player.sendSystemMessage(Component.literal("FIRING BLUE"));
-            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, behavior, 0.5D + 0.25 * ((double) remainingUseDuration /(remainingUseDuration+20*2)), 1D, remainingUseDuration + 20 * 2);
-            projectile.setOwner(player);
-            Vec3 eyePos = getPointInFront(livingEntity, 1);
-            projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());
-
-            projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.01F, 1.0F);
-
-            level.addFreshEntity(projectile);
-        }
-        super.release(level, livingEntity, remainingUseDuration);
-    }
-
-    public Vec3 getPointInFront(LivingEntity entity, double distance) {
-        Vec3 eyePos = entity.getEyePosition().add(0,-entity.getBbHeight() * 0.2,0);
-
-        Vec3 lookDir = entity.getLookAngle();
-
-        return eyePos.add(lookDir.scale(distance));
-    }
-}
+//package com.hatedero.compendiummod.mana.spell.spells;
+//
+//import com.hatedero.compendiummod.entity.BlueProjectile;
+//import com.hatedero.compendiummod.entity.ModEntities;
+//import com.hatedero.compendiummod.entity.ModEntityBehavior;
+//import com.hatedero.compendiummod.mana.ModAttachments;
+//import com.hatedero.compendiummod.mana.ModAttributes;
+//import com.hatedero.compendiummod.mana.spell.Spell;
+//import net.minecraft.core.BlockPos;
+//import net.minecraft.core.particles.ParticleTypes;
+//import net.minecraft.network.chat.Component;
+//import net.minecraft.server.level.ServerLevel;
+//import net.minecraft.server.level.ServerPlayer;
+//import net.minecraft.world.entity.Entity;
+//import net.minecraft.world.entity.LivingEntity;
+//import net.minecraft.world.entity.player.Player;
+//import net.minecraft.world.entity.projectile.ProjectileUtil;
+//import net.minecraft.world.level.ClipContext;
+//import net.minecraft.world.level.Level;
+//import net.minecraft.world.phys.*;
+//
+//import static com.hatedero.compendiummod.entity.ModEntities.ENTITIES;
+//
+//public class BlueSpell extends Spell {
+//    private ModEntityBehavior behavior;
+//
+//    public BlueSpell(float costPerTick, ModEntityBehavior behavior) {
+//        super(costPerTick);
+//        this.behavior = behavior;
+//    }
+//
+//    @Override
+//    public int getUseDuration() {
+//        return 100;
+//    }
+//
+//    @Override
+//    public void chargeTick(Level level, LivingEntity livingEntity, int manaLevel) {
+//        if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
+//            Vec3 eyePos = getPointInFront(livingEntity, 1);
+//
+//            serverLevel.sendParticles(
+//                    ParticleTypes.GLOW,
+//                    eyePos.x, eyePos.y, eyePos.z,
+//                    manaLevel /20,
+//                    0.05, 0.05, 0.05,
+//                    0.01
+//            );
+//        }
+//        super.chargeTick(level, livingEntity, manaLevel);
+//    }
+//
+//    @Override
+//    public void release(Level level, LivingEntity livingEntity, int remainingUseDuration) {
+//        if (!level.isClientSide() && livingEntity instanceof Player player && remainingUseDuration >= 60) {
+//            player.sendSystemMessage(Component.literal("FIRING BLUE"));
+//            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, behavior, 0.5D + 0.25 * ((double) remainingUseDuration /(remainingUseDuration+20*2)), 1D, remainingUseDuration + 20 * 2);
+//            projectile.setOwner(player);
+//            Vec3 eyePos = getPointInFront(livingEntity, 1);
+//            projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());
+//
+//            projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 0.01F, 1.0F);
+//
+//            level.addFreshEntity(projectile);
+//        }
+//        super.release(level, livingEntity, remainingUseDuration);
+//    }
+//
+//    public Vec3 getPointInFront(LivingEntity entity, double distance) {
+//        Vec3 eyePos = entity.getEyePosition().add(0,-entity.getBbHeight() * 0.2,0);
+//
+//        Vec3 lookDir = entity.getLookAngle();
+//
+//        return eyePos.add(lookDir.scale(distance));
+//    }
+//}

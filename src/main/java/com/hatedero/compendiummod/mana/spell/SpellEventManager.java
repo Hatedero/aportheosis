@@ -2,6 +2,7 @@ package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.CompendiumMod;
 import com.hatedero.compendiummod.mana.ModAttachments;
+import com.hatedero.compendiummod.mana.ModAttributes;
 import com.hatedero.compendiummod.mana.spell.spells.EmptySpell;
 import com.hatedero.compendiummod.mana.spell.spellslot.PlayerSpellData;
 import com.hatedero.compendiummod.mana.spell.spellslot.SpellSlotData;
@@ -45,10 +46,10 @@ public class SpellEventManager {
 
         PlayerSpellData newData = data;
 
-        if (slot == null) return;
+        if (slot == null || slot.cooldown() > 0) return;
 
         Spell spell = SpellRegistry.getSpell(level, slot.spellId());
-        int chargeLevel =  slot.chargeLevel() + 1;
+        int chargeLevel = (int) (slot.chargeLevel() + (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * player.getAttributeValue(ModAttributes.MANA_EFFICIENCY) * player.getAttributeValue(ModAttributes.CASTING_SPEED)));
 
         if (spell == null || spell instanceof EmptySpell) {
             return;
