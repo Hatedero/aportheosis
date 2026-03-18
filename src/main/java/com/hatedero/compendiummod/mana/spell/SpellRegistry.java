@@ -56,10 +56,16 @@ public class SpellRegistry {
     public static final DeferredHolder<Spell, Spell> BLUE = SPELLS.register("blue",
             () -> new BlueSpell(1, 200, 20, ModEntityBehavior.THROWN));
 
+    public static final DeferredHolder<Spell, Spell> HANDHELD_BLUE = SPELLS.register("handheld_blue",
+            () -> new BlueSpell(1, 200, 20, ModEntityBehavior.ENTITY_ATTACHED));
+
+    public static final DeferredHolder<Spell, Spell> BLINK = SPELLS.register("blink",
+            () -> new BlinkSpell(1, 200, 20, 15));
+
     /*public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
             () -> new DashSpell(1));
 
-    public static final DeferredHolder<Spell, Spell> BLINK = SPELLS.register("blink",
+    public static final DeferredHolder<Spell, Spell> BLINK = SPELLS.register("blinsk",
             () -> new BlinkSpell(1));
 
     public static final DeferredHolder<Spell, Spell> GRAVITY_ZONE = SPELLS.register("gravity_zone",

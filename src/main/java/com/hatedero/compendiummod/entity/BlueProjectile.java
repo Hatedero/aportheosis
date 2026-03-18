@@ -30,14 +30,18 @@ public class BlueProjectile extends AbstractHurtingProjectile {
     private int maxLife;
     private double attractionForce;
     private double radius;
+    private double range;
+    private double maxSpeed;
     private ModEntityBehavior behavior;
 
-    public BlueProjectile(EntityType<? extends BlueProjectile> type, Level level, ModEntityBehavior behavior, double attractionForce, double radius, int maxLife) {
+    public BlueProjectile(EntityType<? extends BlueProjectile> type, Level level, ModEntityBehavior behavior, double attractionForce, double radius, int maxLife, double range, double maxSpeed) {
         super(type, level);
         this.behavior = behavior;
         this.attractionForce = attractionForce;
         this.radius = radius;
         this.maxLife = maxLife;
+        this.range = range;
+        this.maxSpeed = maxSpeed;
     }
 
     public BlueProjectile(EntityType<BlueProjectile> type, Level level) {
@@ -61,18 +65,17 @@ public class BlueProjectile extends AbstractHurtingProjectile {
                 if (!this.level().isClientSide()) {
                     Entity owner = getOwner();
                     if (owner instanceof Player player) {
-                        this.setPos(getPositionInLookDirection(player, 8));
+                        this.setPos(getPositionInLookDirection(player, range));
                     }
                 }
             }
             case THROWN -> {
                 super.tick();
                 Vec3 movement = this.getDeltaMovement();
-                double speedLimit = 0.5D;
 
                 if (!this.level().isClientSide()) {
-                    if (movement.length() > speedLimit) {
-                        this.setDeltaMovement(movement.normalize().scale(speedLimit));
+                    if (movement.length() > maxSpeed) {
+                        this.setDeltaMovement(movement.normalize().scale(maxSpeed));
                     }
                 }
             }

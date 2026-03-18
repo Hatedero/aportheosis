@@ -46,7 +46,7 @@ public class BlueSpell extends Spell {
     @Override
     public void releaseEffect(Level level, Player player, int manaLevel) {
         if (!level.isClientSide() && manaLevel >= 60) {
-            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, behavior, 0.5D + 0.25 * ((double) manaLevel /(manaLevel+20*2)), 1D, manaLevel + 20 * 2);
+            BlueProjectile projectile = new BlueProjectile(ModEntities.BLUE_PROJECTILE.get(), level, behavior, 0.5D + 0.25 * ((double) manaLevel /(manaLevel+20*2)), 1D, manaLevel + 20 * 2, 8, 0.5);
             projectile.setOwner(player);
             Vec3 eyePos = getPointInFront(player, 1);
             projectile.setPos(eyePos.x(), eyePos.y(), eyePos.z());
