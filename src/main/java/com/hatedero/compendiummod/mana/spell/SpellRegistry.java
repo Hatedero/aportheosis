@@ -50,6 +50,12 @@ public class SpellRegistry {
     public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
             () -> new ReverseCursedTechniqueSpell(5, -1, 200, 100));
 
+    public static final DeferredHolder<Spell, Spell> CLEAVE = SPELLS.register("cleave",
+            () -> new CleaveSpell(1, -1, 20));
+
+    public static final DeferredHolder<Spell, Spell> BLUE = SPELLS.register("blue",
+            () -> new BlueSpell(1, 200, 20, ModEntityBehavior.THROWN));
+
     /*public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
             () -> new DashSpell(1));
 

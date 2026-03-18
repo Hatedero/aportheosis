@@ -57,7 +57,7 @@ public class ModEvents {
             if (!hasSlot) {
                 updatedSlots.add(new SpellSlotData(
                         slot,
-                        "reverse_cursed_technique",
+                        "blue",
                         0,
                         0
                 ));
