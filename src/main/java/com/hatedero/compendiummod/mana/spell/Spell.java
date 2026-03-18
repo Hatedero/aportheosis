@@ -21,7 +21,7 @@ public abstract class Spell{
     public void chargeTick(Level level, Player player, int manaLevel, String slotName) {
         if (!level.isClientSide) {
             int cost = (int) (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * player.getAttributeValue(ModAttributes.MANA_EFFICIENCY) * player.getAttributeValue(ModAttributes.CASTING_SPEED));
-            if (canUseMana(player, cost, manaLevel)) {
+            if (canUseMana(player, manaLevel)) {
                 player.setData(MANA, player.getData(MANA) - cost);
                 chargeEffect(level, player, manaLevel);
             } else {
@@ -34,7 +34,6 @@ public abstract class Spell{
         if (!level.isClientSide()) {
             releaseEffect(level, player, remainingUseDuration);
             SpellSlotDataHelper.putSlotOnCooldown(player, getCooldown(), slotName);
-            //SpellSlotDataHelper.cooldownHandler(player, getCooldown());
         }
     }
 
@@ -45,9 +44,7 @@ public abstract class Spell{
         return this.cooldown;
     };
 
-    public boolean canUseMana (Player player, int cost, int manaLevel) {
-        if (SpellSlotDataHelper.canUseMana(player) && manaLevel <= maxManaCharge)
-            return true;
-        return false;
+    public boolean canUseMana (Player player, int manaLevel) {
+        return SpellSlotDataHelper.canUseMana(player) && (maxManaCharge < 0 || manaLevel <= maxManaCharge);
     }
 }

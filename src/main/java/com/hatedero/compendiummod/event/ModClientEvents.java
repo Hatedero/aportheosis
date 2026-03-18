@@ -65,7 +65,7 @@ public class ModClientEvents {
             if (spell == null || spell instanceof EmptySpell) return;
 
             String translationKey = "spell." + SPELLS.getRegistry().get().getKey(spell).toLanguageKey();
-            player.displayClientMessage(Component.literal("CHARGING ").append(Component.translatable(translationKey)).append(Component.literal(" : " + slot.chargeLevel() )), true);
+            player.displayClientMessage(Component.literal("CHARGING ").append(Component.translatable(translationKey)).append(Component.literal(" : " + slot.chargeLevel() ).append(" FOR : " + (player.level().getGameTime() - data.chargeStartTime()))), true);
         }
     }
 

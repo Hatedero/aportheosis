@@ -57,12 +57,12 @@ public class ModEvents {
             if (!hasSlot) {
                 updatedSlots.add(new SpellSlotData(
                         slot,
-                        "debug",
+                        "reverse_cursed_technique",
                         0,
                         0
                 ));
 
-                player.setData(ModAttachments.SPELL_DATA, new PlayerSpellData(updatedSlots, ""));
+                player.setData(ModAttachments.SPELL_DATA, new PlayerSpellData(updatedSlots, "", player.level().getGameTime()));
 
                 player.sendSystemMessage(Component.literal( "Added " + slot + " spell slot to " + player.getName().getString()));
             }

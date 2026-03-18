@@ -5,13 +5,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.List;
 
-public record PlayerSpellData(List<SpellSlotData> slots, String chargingSlotName) {
+public record PlayerSpellData(List<SpellSlotData> slots, String chargingSlotName, Long chargeStartTime) {
     public static final Codec<PlayerSpellData> CODEC = RecordCodecBuilder.create(inst -> inst.group(
             SpellSlotData.CODEC.listOf().fieldOf("slots").forGetter(PlayerSpellData::slots),
-            Codec.STRING.fieldOf("charging_slot_name").forGetter(PlayerSpellData::chargingSlotName)
+            Codec.STRING.fieldOf("charging_slot_name").forGetter(PlayerSpellData::chargingSlotName),
+            Codec.LONG.fieldOf("charge_start_time").forGetter(PlayerSpellData::chargeStartTime)
     ).apply(inst, PlayerSpellData::new));
 
     public static PlayerSpellData empty() {
-        return new PlayerSpellData(List.of(), "");
+        return new PlayerSpellData(List.of(), "", 0L);
     }
 }

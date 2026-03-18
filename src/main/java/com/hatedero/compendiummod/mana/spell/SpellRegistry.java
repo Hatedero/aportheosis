@@ -47,10 +47,10 @@ public class SpellRegistry {
     public static final DeferredHolder<Spell, Spell> DEBUG = SPELLS.register("debug",
             () -> new DebugSpell(2, 200, 100));
 
-    /*public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
-            () -> new ReverseCursedTechniqueSpell(5));
+    public static final DeferredHolder<Spell, Spell> REVERSE_CURSED_TECHNIQUE = SPELLS.register("reverse_cursed_technique",
+            () -> new ReverseCursedTechniqueSpell(5, -1, 200, 100));
 
-    public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
+    /*public static final DeferredHolder<Spell, Spell> ICARUS_DASH = SPELLS.register("icarus_dash",
             () -> new DashSpell(1));
 
     public static final DeferredHolder<Spell, Spell> BLINK = SPELLS.register("blink",

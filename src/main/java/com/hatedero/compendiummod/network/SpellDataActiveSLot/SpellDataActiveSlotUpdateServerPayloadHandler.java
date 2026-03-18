@@ -17,6 +17,6 @@ public class SpellDataActiveSlotUpdateServerPayloadHandler {
     public static void handleDataOnMain(final SpellDataActiveSlotUpdatePayload data, final IPayloadContext context) {
         Player player = context.player();
         if (SpellSlotDataHelper.canUseMana(player))
-            player.setData(SPELL_DATA, new PlayerSpellData(player.getData(SPELL_DATA).slots(), data.data()));
+            player.setData(SPELL_DATA, new PlayerSpellData(player.getData(SPELL_DATA).slots(), data.data(), player.level().getGameTime()));
     }
 }

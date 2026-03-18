@@ -26,7 +26,8 @@ public class SpellSlotDataHelper {
                     }
                     return s;
                 }).toList(),
-                ""
+                "",
+                data.chargeStartTime()
         );
         player.setData(SPELL_DATA, newData);
     }
@@ -45,7 +46,8 @@ public class SpellSlotDataHelper {
                     }
                     return s;
                 }).toList(),
-                (Objects.equals(data.chargingSlotName(), slotName)) ? "" : data.chargingSlotName()
+                (Objects.equals(data.chargingSlotName(), slotName)) ? "" : data.chargingSlotName(),
+                data.chargeStartTime()
         );
         player.setData(SPELL_DATA, newData);
     }

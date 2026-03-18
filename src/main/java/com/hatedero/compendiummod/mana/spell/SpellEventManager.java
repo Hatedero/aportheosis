@@ -54,7 +54,7 @@ public class SpellEventManager {
                 }
                 return s;
             }).toList();
-        newData = new PlayerSpellData(updatedSlots, data.chargingSlotName());
+        newData = new PlayerSpellData(updatedSlots, data.chargingSlotName(), player.level().getGameTime());
         player.setData(SPELL_DATA, newData);
     }
 
@@ -108,7 +108,7 @@ public class SpellEventManager {
                 }
                 return s;
             }).toList();
-            newData = new PlayerSpellData(updatedSlots, data.chargingSlotName());
+            newData = new PlayerSpellData(updatedSlots, data.chargingSlotName(), data.chargeStartTime());
             player.setData(SPELL_DATA, newData);
             spell.chargeTick(level, player, chargeLevel, data.chargingSlotName());
         }
