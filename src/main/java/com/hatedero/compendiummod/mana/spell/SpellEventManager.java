@@ -29,6 +29,7 @@ public class SpellEventManager {
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!event.getEntity().level().isClientSide() && event.getEntity() instanceof ServerPlayer player) {
             handleSpellCharging(player);
+            handleLeftOverCharges(player);
             handleCooldowns(player);
         }
     }
@@ -55,6 +56,21 @@ public class SpellEventManager {
             }).toList();
         newData = new PlayerSpellData(updatedSlots, data.chargingSlotName());
         player.setData(SPELL_DATA, newData);
+    }
+
+    private static void handleLeftOverCharges(ServerPlayer player) {
+        Level level = player.level();
+
+        if (level.isClientSide()) return;
+
+        PlayerSpellData data = player.getData(SPELL_DATA);
+
+        data.slots().forEach(s -> {
+            if (s.chargeLevel() > 0 && !s.slotName().equals(data.chargingSlotName())) {
+                Spell spell = getSpell(level, s.spellId());
+                spell.release(level, player, s.chargeLevel(), s.slotName());
+            }
+        });
     }
 
     private static void handleSpellCharging(ServerPlayer player) {
@@ -94,7 +110,7 @@ public class SpellEventManager {
             }).toList();
             newData = new PlayerSpellData(updatedSlots, data.chargingSlotName());
             player.setData(SPELL_DATA, newData);
-            spell.chargeTick(level, player, chargeLevel);
+            spell.chargeTick(level, player, chargeLevel, data.chargingSlotName());
         }
     }
 }

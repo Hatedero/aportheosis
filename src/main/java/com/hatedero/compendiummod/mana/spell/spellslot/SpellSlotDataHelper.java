@@ -1,11 +1,7 @@
 package com.hatedero.compendiummod.mana.spell.spellslot;
 
 import com.hatedero.compendiummod.mana.ModAttributes;
-import com.hatedero.compendiummod.network.SpellData.SpellDataUpdatePayload;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Objects;
 
@@ -31,6 +27,25 @@ public class SpellSlotDataHelper {
                     return s;
                 }).toList(),
                 ""
+        );
+        player.setData(SPELL_DATA, newData);
+    }
+
+    public static void putSlotOnCooldown(Player player, int cooldown, String slotName) {
+        PlayerSpellData data = player.getData(SPELL_DATA);
+        PlayerSpellData newData = new PlayerSpellData(
+                data.slots().stream().map(s -> {
+                    if (Objects.equals(s.slotName(), slotName)) {
+                        return new SpellSlotData(
+                                s.slotName(),
+                                s.spellId(),
+                                0,
+                                cooldown
+                        );
+                    }
+                    return s;
+                }).toList(),
+                (Objects.equals(data.chargingSlotName(), slotName)) ? "" : data.chargingSlotName()
         );
         player.setData(SPELL_DATA, newData);
     }

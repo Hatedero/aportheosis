@@ -1,14 +1,11 @@
 package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.mana.ModAttributes;
-import com.hatedero.compendiummod.mana.spell.spellslot.PlayerSpellData;
 import com.hatedero.compendiummod.mana.spell.spellslot.SpellSlotDataHelper;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import static com.hatedero.compendiummod.mana.ModAttachments.*;
-import static com.hatedero.compendiummod.mana.ModAttachments.CHARGE_TIME;
 
 public abstract class Spell{
     protected int minManaCostPerTick;
@@ -21,22 +18,23 @@ public abstract class Spell{
         this.cooldown = cooldown;
     }
 
-    public void chargeTick(Level level, Player player, int manaLevel) {
+    public void chargeTick(Level level, Player player, int manaLevel, String slotName) {
         if (!level.isClientSide) {
             int cost = (int) (player.getAttributeValue(ModAttributes.MANA_OUTPUT) * player.getAttributeValue(ModAttributes.MANA_EFFICIENCY) * player.getAttributeValue(ModAttributes.CASTING_SPEED));
             if (canUseMana(player, cost, manaLevel)) {
                 player.setData(MANA, player.getData(MANA) - cost);
                 chargeEffect(level, player, manaLevel);
             } else {
-                release(level, player, manaLevel);
+                release(level, player, manaLevel, slotName);
             }
         }
     }
 
-    public void release (Level level, Player player, int remainingUseDuration) {
+    public void release (Level level, Player player, int remainingUseDuration, String slotName) {
         if (!level.isClientSide()) {
             releaseEffect(level, player, remainingUseDuration);
-            SpellSlotDataHelper.cooldownHandler(player, getCooldown());
+            SpellSlotDataHelper.putSlotOnCooldown(player, getCooldown(), slotName);
+            //SpellSlotDataHelper.cooldownHandler(player, getCooldown());
         }
     }
 
