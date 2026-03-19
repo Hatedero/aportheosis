@@ -50,11 +50,13 @@ public class ManaHudOverlay implements LayeredDraw.Layer {
 
         y -= (data.slots().size() * lineHeight) / 2;
 
+        guiGraphics.drawString(minecraft.font, String.valueOf(data.chargeStartTime()), 0, 0, 0xFFFFFF);
+
         for (SpellSlotData slot : data.slots()) {
             String slotName = Component.translatable("slot." + CompendiumMod.MODID + "." + slot.slotName()).getString();
             String spellName = Component.translatable("spell." + CompendiumMod.MODID + "." + slot.spellId()).getString();
 
-            text = String.format("%s : %s | %d | %d", slotName, spellName, slot.cooldown(), slot.chargeLevel());
+            text = String.format("%s : %s| %d | %d", slotName, spellName, slot.cooldown(), slot.chargeLevel());
 
             guiGraphics.drawString(minecraft.font, text, x, y, 0xFFFFFF);
 

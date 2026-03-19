@@ -47,7 +47,7 @@ public class KeyInputHandler {
             if (slotToPacket != null) {
                 Player player = Minecraft.getInstance().player;
                 if (player != null) {
-                    PacketDistributor.sendToServer(new SpellDataActiveSlotUpdatePayload(slotToPacket));
+                    PacketDistributor.sendToServer(new SpellDataActiveSlotUpdatePayload(slotToPacket,0L));
                 }
             }
 
@@ -71,7 +71,7 @@ public class KeyInputHandler {
                 assert Minecraft.getInstance().player != null;
                 Player player = Minecraft.getInstance().player;
                 if (Objects.equals(player.getData(SPELL_DATA).chargingSlotName(), slotToPacket)) {
-                    PacketDistributor.sendToServer(new SpellDataActiveSlotUpdatePayload(""));
+                    PacketDistributor.sendToServer(new SpellDataActiveSlotUpdatePayload("", -1L));
                 }
             }
         }

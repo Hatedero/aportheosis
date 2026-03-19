@@ -13,8 +13,8 @@ public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, CompendiumMod.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, LodestoneParticleTypes> BLUE =
-            PARTICLES.register("blue", LodestoneParticleRegistry::getParticleType);
+    //public static final DeferredHolder<ParticleType<?>, LodestoneParticleTypes> BLUE =
+      //      PARTICLES.register("blue", LodestoneParticleRegistry::getParticleType);
 
 
     public static void register(IEventBus eventBus) {

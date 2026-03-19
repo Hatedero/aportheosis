@@ -1,5 +1,6 @@
 package com.hatedero.compendiummod.entity;
 
+import com.hatedero.compendiummod.particles.ParticleHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +23,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.registry.common.particle.LodestoneParticleTypes;
+import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 
+import java.awt.*;
 import java.util.List;
 
 public class BlueProjectile extends AbstractHurtingProjectile {
@@ -50,6 +56,15 @@ public class BlueProjectile extends AbstractHurtingProjectile {
 
     @Override
     public void tick() {
+        if (this.level().isClientSide) {
+            WorldParticleBuilder.create(LodestoneParticleTypes.WISP_PARTICLE)
+                    .setScaleData(GenericParticleData.create(0.75f).build())
+                    .setColorData(ColorParticleData.create(Color.CYAN, Color.BLUE))
+                    .setLifetime(20)
+                    .setMotion(this.getDeltaMovement())
+                    .spawn(this.level(), position());
+        }
+
         this.age++;
 
         if (this.age >= maxLife) {
@@ -103,10 +118,6 @@ public class BlueProjectile extends AbstractHurtingProjectile {
 
                 target.hasImpulse = true;
             }
-        }
-        if (this.level().isClientSide) {
-            this.level().addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
-
         }
     }
 

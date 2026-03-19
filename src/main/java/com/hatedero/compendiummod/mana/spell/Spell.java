@@ -2,6 +2,7 @@ package com.hatedero.compendiummod.mana.spell;
 
 import com.hatedero.compendiummod.mana.ModAttributes;
 import com.hatedero.compendiummod.mana.spell.spellslot.SpellSlotDataHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -24,6 +25,8 @@ public abstract class Spell{
             if(manaLevel > this.maxManaCharge)
                 manaLevel = this.maxManaCharge;
             if (canUseMana(player, manaLevel)) {
+                if(player.getData(SPELL_DATA).chargeStartTime() == player.level().getGameTime()-1)
+                    startEffect(level, player, manaLevel);
                 player.setData(MANA, player.getData(MANA) - cost);
                 chargeEffect(level, player, manaLevel);
             } else {
@@ -37,6 +40,9 @@ public abstract class Spell{
             releaseEffect(level, player, remainingUseDuration);
             SpellSlotDataHelper.putSlotOnCooldown(player, getCooldown(), slotName);
         }
+    }
+
+    public void startEffect(Level level, Player player, int manaLevel) {
     }
 
     public abstract void chargeEffect(Level level, Player player, int manaLevel);

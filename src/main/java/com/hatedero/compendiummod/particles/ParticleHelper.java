@@ -23,11 +23,5 @@ public class ParticleHelper {
                 .setScaleData(GenericParticleData.create(0.5f, 0f).build())
                 .setTransparencyData(GenericParticleData.create(1.0f, 1.0f).build())
                 .spawn(level, pos.x, pos.y, pos.z);
-
-        WorldParticleBuilder.create(LodestoneParticleTypes.WISP_PARTICLE)
-                .setTransparencyData(GenericParticleData.create(1.0f, 0.0f).build())
-                .setScaleData(GenericParticleData.create(0.4f, 0.0f).build())
-                .setLifetime(30)
-                .spawn(level, pos.x, pos.y, pos.z);
     }
 }

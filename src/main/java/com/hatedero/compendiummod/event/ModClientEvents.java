@@ -69,10 +69,6 @@ public class ModClientEvents {
 
             String translationKey = "spell." + SPELLS.getRegistry().get().getKey(spell).toLanguageKey();
             player.displayClientMessage(Component.literal("CHARGING ").append(Component.translatable(translationKey)).append(Component.literal(" : " + slot.chargeLevel())), true);
-
-            if(player.tickCount % 10 == 0)
-                ParticleHelper.spawnBasicParticle(level, getPointInFront(player, 1));
-
         }
     }
 
@@ -86,7 +82,7 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(MyModParticles.CUSTOM_SPRITE.get(), LodestoneParticleSpawner.SpritePicker::new);
+        //event.registerSpriteSet(MyModParticles.CUSTOM_SPRITE.get(), LodestoneParticleSpawner.SpritePicker::new);
     }
 
     @SubscribeEvent

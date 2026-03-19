@@ -32,18 +32,6 @@ public class BlueSpell extends Spell {
 
     @Override
     public void chargeEffect(Level level, Player player, int manaLevel) {
-        if (level instanceof ServerLevel serverLevel) {
-            Vec3 eyePos = getPointInFront(player, 0.5);
-            serverLevel.sendParticles(
-                    ParticleTypes.GLOW,
-                    eyePos.x, eyePos.y, eyePos.z,
-                    manaLevel / 20,
-                    0.05, 0.05, 0.05,
-                    0.01
-            );
-        } else if (level.isClientSide()){
-            player.sendSystemMessage(Component.literal("SHOW ME"));
-        }
     }
 
     @Override

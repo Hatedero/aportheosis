@@ -54,7 +54,7 @@ public class SpellEventManager {
                 }
                 return s;
             }).toList();
-        newData = new PlayerSpellData(updatedSlots, data.chargingSlotName(), player.level().getGameTime());
+        newData = new PlayerSpellData(updatedSlots, data.chargingSlotName(), data.chargeStartTime());
         player.setData(SPELL_DATA, newData);
     }
 
