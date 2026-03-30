@@ -60,45 +60,12 @@ public class BlockingSwordItem extends TieredItem {
         if (!level.isClientSide && livingEntity instanceof Player) {
             stack.hurtAndBreak(1, livingEntity, LivingEntity.getSlotForHand(livingEntity.getUsedItemHand()));
 
-            AttributeInstance instance = livingEntity.getAttribute(ModAttributes.MAX_MANA);
-
-            Random random = new Random();
-
-            if (instance != null) {
-                instance.setBaseValue(100);
-            }
-
-            livingEntity.setData(MANA, 0.0);
-
-            float randomSpeed = (float) (20f * Math.random());
-
-            float speedModifier = randomSpeed - 4.0f;
-
-            float baseDamage = (float) (10000f * Math.random());
-
-            ItemAttributeModifiers newModifiers = ItemAttributeModifiers.builder()
-                    .add(Attributes.ATTACK_DAMAGE,
-                            new AttributeModifier(
-                                    ResourceLocation.withDefaultNamespace("base_attack_damage"),
-                                    (double)baseDamage,
-                                    AttributeModifier.Operation.ADD_VALUE),
-                            EquipmentSlotGroup.MAINHAND)
-
-                    .add(Attributes.ATTACK_SPEED,
-                            new AttributeModifier(
-                                    ResourceLocation.withDefaultNamespace("base_attack_speed"),
-                                    (double)speedModifier,
-                                    AttributeModifier.Operation.ADD_VALUE),
-                            EquipmentSlotGroup.MAINHAND)
-                    .build();
-
-            stack.set(DataComponents.ATTRIBUTE_MODIFIERS, newModifiers);
         }
         super.releaseUsing(stack, level, livingEntity, timeCharged);
     }
 
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return repair.is(ItemTags.PLANKS) || super.isValidRepairItem(toRepair, repair);
+        return repair.is(ItemTags.GOLD_ORES) || super.isValidRepairItem(toRepair, repair);
     }
 
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
