@@ -34,6 +34,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.YUMIKO_BOOTS.get());
                         output.accept(ModItems.CONSUME_SPELL.get());
                         output.accept(ModItems.REVERSE_CURSED_TECHNIQUE_SPELL.get());
+                        output.accept(ModBlocks.ABYSS_PORTAL.get());
                     }).build());
 
     public static void register(IEventBus eventBus) {

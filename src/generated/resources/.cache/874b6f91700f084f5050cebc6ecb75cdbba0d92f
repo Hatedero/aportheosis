@@ -1,1 +1,4 @@
-// 1.21.1	2026-02-18T00:34:22.8997067	Block States: compendiummod
+// 1.21.1	2026-03-30T20:12:58.211336	Block States: compendiummod
+f638ccdee7015b93d3b273ac5f74304c6f0c16c5 assets/compendiummod/blockstates/abyss_portal.json
+a429404027b41ac6f5f9d2cca696e5d1268c642a assets/compendiummod/models/block/abyss_portal.json
+ed33e7dc5e4f1f1e6e4b7ac68c992b985bb5f34d assets/compendiummod/models/item/abyss_portal.json

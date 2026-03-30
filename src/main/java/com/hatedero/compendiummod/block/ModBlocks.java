@@ -1,20 +1,25 @@
 package com.hatedero.compendiummod.block;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.block.custom.AbyssPortalBlock;
 import com.hatedero.compendiummod.item.ModItems;
+import com.hatedero.compendiummod.item.custom.SpearItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -26,6 +31,8 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CompendiumMod.MODID);
 
+    public static final DeferredBlock<Block> ABYSS_PORTAL = registerBlock("abyss_portal",
+            () -> new AbyssPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).sound(SoundType.SCULK)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

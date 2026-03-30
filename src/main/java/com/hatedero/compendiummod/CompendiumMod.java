@@ -34,7 +34,6 @@ public class CompendiumMod {
 
         NeoForge.EVENT_BUS.register(this);
 
-        ModCreativeModeTabs.register(modEventBus);
 
         ModParticles.register(modEventBus);
 
@@ -49,6 +48,8 @@ public class CompendiumMod {
         ModAttachments.register(modEventBus);
 
         SpellRegistry.register(modEventBus);
+
+        ModCreativeModeTabs.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 

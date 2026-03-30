@@ -2,6 +2,7 @@ package com.hatedero.compendiummod.datagen;
 
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.CropBlock;
@@ -22,7 +23,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-
+        blockWithItem(ModBlocks.ABYSS_PORTAL);
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
