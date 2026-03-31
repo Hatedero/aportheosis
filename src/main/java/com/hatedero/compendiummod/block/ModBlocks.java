@@ -24,9 +24,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-import static net.minecraft.world.level.block.grower.TreeGrower.DARK_OAK;
-import static net.minecraft.world.level.block.grower.TreeGrower.JUNGLE;
-
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(CompendiumMod.MODID);
