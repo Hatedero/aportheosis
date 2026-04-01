@@ -29,7 +29,10 @@ public class ModBlocks {
             DeferredRegister.createBlocks(CompendiumMod.MODID);
 
     public static final DeferredBlock<Block> ABYSS_PORTAL = registerBlock("abyss_portal",
-            () -> new AbyssPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).sound(SoundType.SCULK)));
+            () -> new AbyssPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).sound(SoundType.SCULK).noLootTable()));
+
+    public static final DeferredBlock<Block> OSTEANIAN_GRATED_BLOCK = registerBlock("osteanian_grated_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_GRATE).sound(SoundType.SCULK)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

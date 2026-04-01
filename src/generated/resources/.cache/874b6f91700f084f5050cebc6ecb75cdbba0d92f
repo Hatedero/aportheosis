@@ -1,4 +1,7 @@
-// 1.21.1	2026-03-30T20:12:58.211336	Block States: compendiummod
+// 1.21.1	2026-04-01T10:11:28.6956434	Block States: compendiummod
 f638ccdee7015b93d3b273ac5f74304c6f0c16c5 assets/compendiummod/blockstates/abyss_portal.json
+899295b03b9e2e6fb79eef78c112a25944a7fe50 assets/compendiummod/blockstates/osteanian_grated_block.json
 a429404027b41ac6f5f9d2cca696e5d1268c642a assets/compendiummod/models/block/abyss_portal.json
+092b0839b5cc8d7cb99fdbd13431703594735ac2 assets/compendiummod/models/block/osteanian_grated_block.json
 ed33e7dc5e4f1f1e6e4b7ac68c992b985bb5f34d assets/compendiummod/models/item/abyss_portal.json
+4ec57b2cb5ef580fd3933166641f058af91da5ae assets/compendiummod/models/item/osteanian_grated_block.json

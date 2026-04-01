@@ -24,10 +24,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.ABYSS_PORTAL);
+        blockWithItem(ModBlocks.OSTEANIAN_GRATED_BLOCK, "cutout");
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
         simpleBlockWithItem(deferredBlock.get(), cubeAll(deferredBlock.get()));
+    }
+
+    private void blockWithItem(DeferredBlock<?> deferredBlock, String renderType) {
+        simpleBlockWithItem(deferredBlock.get(),
+                models().cubeAll(deferredBlock.getId().getPath(), blockTexture(deferredBlock.get()))
+                        .renderType(mcLoc(renderType))
+        );
     }
 
     private void blockItem(DeferredBlock<?> deferredBlock) {

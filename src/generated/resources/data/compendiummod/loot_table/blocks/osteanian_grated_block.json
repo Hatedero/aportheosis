@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "compendiummod:abyss_portal"
+          "name": "compendiummod:osteanian_grated_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "compendiummod:blocks/abyss_portal"
+  "random_sequence": "compendiummod:blocks/osteanian_grated_block"
 }
