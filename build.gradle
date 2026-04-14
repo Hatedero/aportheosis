@@ -87,6 +87,10 @@ neoForge {
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
+        tasks.named('processResources', ProcessResources).configure {
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        }
+
         // applies to all the run configs above
         configureEach {
             // Recommended logging data for a userdev environment

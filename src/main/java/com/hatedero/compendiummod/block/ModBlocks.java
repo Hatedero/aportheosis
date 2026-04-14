@@ -37,6 +37,15 @@ public class ModBlocks {
     public static final DeferredBlock<Block> OSTEANIAN_BLOCK = registerBlock("osteanian_block",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).sound(SoundType.SCULK)));
 
+    public static final DeferredBlock<Block> ABYSS_GLASS = registerBlock("abyss_glass",
+            () -> new TintedGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TINTED_GLASS).sound(SoundType.AMETHYST).noOcclusion().strength(5.0F, 1200.0F)));
+
+    public static final DeferredBlock<Block> ABYSS_GRASS = registerBlock("abyss_grass",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).sound(SoundType.SCULK)));
+
+    public static final DeferredBlock<Block> ABYSS_DIRT = registerBlock("abyss_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).sound(SoundType.SCULK)));
+
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

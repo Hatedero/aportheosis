@@ -36,6 +36,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.REVERSE_CURSED_TECHNIQUE_SPELL.get());
                         output.accept(ModBlocks.ABYSS_PORTAL.get());
                         output.accept(ModBlocks.OSTEANIAN_GRATED_BLOCK.get());
+                        output.accept(ModBlocks.OSTEANIAN_BLOCK.get());
+                        output.accept(ModBlocks.ABYSS_GRASS.get());
+                        output.accept(ModBlocks.ABYSS_GLASS.get());
+                        output.accept(ModBlocks.ABYSS_DIRT.get());
                     }).build());
 
     public static void register(IEventBus eventBus) {

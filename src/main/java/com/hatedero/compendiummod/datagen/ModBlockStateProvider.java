@@ -24,7 +24,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.ABYSS_PORTAL);
+        blockWithItem(ModBlocks.OSTEANIAN_BLOCK);
         blockWithItem(ModBlocks.OSTEANIAN_GRATED_BLOCK, "cutout");
+        blockWithItem(ModBlocks.ABYSS_GLASS, "cutout");
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {

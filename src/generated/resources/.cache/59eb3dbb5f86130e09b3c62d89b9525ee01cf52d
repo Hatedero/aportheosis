@@ -1,2 +1,6 @@
-// 1.21.1	2026-04-01T10:11:28.6946457	Loot Tables
+// 1.21.1	2026-04-14T11:44:38.4957694	Loot Tables
+23cfd17ad4e868d726cff90c86ed637e19340fd6 data/compendiummod/loot_table/blocks/abyss_dirt.json
+fa85c42350a263fb16efe2e1d01275f0bc3436fe data/compendiummod/loot_table/blocks/abyss_glass.json
+b67999a2b332cc8d4b5dd79d40436267440783ba data/compendiummod/loot_table/blocks/abyss_grass.json
+e4541f2240c11aebdfdf93c7fd9a1db6bee57dc1 data/compendiummod/loot_table/blocks/osteanian_block.json
 d6887ff5fadff087c39f794537a35f0e44bf3dc9 data/compendiummod/loot_table/blocks/osteanian_grated_block.json

@@ -1,6 +1,7 @@
 package com.hatedero.compendiummod.event;
 
 import com.hatedero.compendiummod.CompendiumMod;
+import com.hatedero.compendiummod.block.ModBlocks;
 import com.hatedero.compendiummod.entity.ModEntities;
 import com.hatedero.compendiummod.entity.renderer.FlatSpriteRenderer;
 import com.hatedero.compendiummod.item.custom.BootsModel;
@@ -13,12 +14,14 @@ import com.hatedero.compendiummod.mana.spell.spellslot.PlayerSpellData;
 import com.hatedero.compendiummod.mana.spell.spellslot.SpellSlotData;
 import com.hatedero.compendiummod.particles.ModParticles;
 import com.hatedero.compendiummod.particles.ParticleHelper;
+import com.hatedero.compendiummod.util.AbyssalBlockColorHelper;
 import com.hatedero.compendiummod.util.ModKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -86,10 +89,28 @@ public class ModClientEvents {
             player.displayClientMessage(Component.literal("CHARGING ").append(Component.translatable(translationKey)).append(Component.literal(" : " + slot.chargeLevel())), true);
 
             spell.chargeTick(level, player, slot.chargeLevel(), slot.slotName());
-            /*if (player.tickCount%3 == 0 && player.getRandom().nextBoolean()) {
-                ParticleHelper.spawnRandomStarAt(level, getPointInFrontWithRandomOffset(player, 1, -0.5, 0.5));
-            }*/
+
         }
+    }
+
+    @SubscribeEvent
+    public static void blockColorHandlerEvent(final RegisterColorHandlersEvent.Block event)
+    {
+        event.register(
+                (state, world, pos, tintIndex) -> {
+                    return world != null && pos != null ? AbyssalBlockColorHelper.getAbyssTakenBlockColorFromHeight(pos) : -1;
+                }
+                , ModBlocks.ABYSS_DIRT.get(), ModBlocks.ABYSS_GRASS.get());
+    }
+
+    @SubscribeEvent
+    public static void itemColorHandlerEvent(final RegisterColorHandlersEvent.Item event)
+    {
+        event.register((stack, tintIndex) -> {
+            int color = AbyssalBlockColorHelper.getAbyssTakenBlockColorFromHeight(Minecraft.getInstance().player.blockPosition());
+            return color;
+        }, ModBlocks.ABYSS_DIRT, ModBlocks.ABYSS_GRASS);
+
     }
 
     @SubscribeEvent

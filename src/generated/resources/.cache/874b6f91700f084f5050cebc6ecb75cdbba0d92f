@@ -1,7 +1,13 @@
-// 1.21.1	2026-04-01T10:11:28.6956434	Block States: compendiummod
+// 1.21.1	2026-04-14T11:50:50.5814796	Block States: compendiummod
+2ad7fd930b6a0c1cf9d2cf5f5df14a0ad02017fa assets/compendiummod/blockstates/abyss_glass.json
 f638ccdee7015b93d3b273ac5f74304c6f0c16c5 assets/compendiummod/blockstates/abyss_portal.json
+0c3a3e2f3c46304064480dd6e61f66e3e861bbcf assets/compendiummod/blockstates/osteanian_block.json
 899295b03b9e2e6fb79eef78c112a25944a7fe50 assets/compendiummod/blockstates/osteanian_grated_block.json
+a505a6d911cb2fe659195b1a16e137a73fcbd433 assets/compendiummod/models/block/abyss_glass.json
 a429404027b41ac6f5f9d2cca696e5d1268c642a assets/compendiummod/models/block/abyss_portal.json
+576a7ed19ec802da6342c2741327ff4ba832a57d assets/compendiummod/models/block/osteanian_block.json
 092b0839b5cc8d7cb99fdbd13431703594735ac2 assets/compendiummod/models/block/osteanian_grated_block.json
+1038360ffbd8b7e556584be0b042f4b9ff185525 assets/compendiummod/models/item/abyss_glass.json
 ed33e7dc5e4f1f1e6e4b7ac68c992b985bb5f34d assets/compendiummod/models/item/abyss_portal.json
+08be774a2bd6d66b7644f62bb8900526260293c3 assets/compendiummod/models/item/osteanian_block.json
 4ec57b2cb5ef580fd3933166641f058af91da5ae assets/compendiummod/models/item/osteanian_grated_block.json
